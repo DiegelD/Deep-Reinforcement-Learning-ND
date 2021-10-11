@@ -46,6 +46,10 @@ Reinforcement learning is learning what to do - how to map situation to action -
 trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.
 These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
 
+The problem fromalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
+Markov decision (MD) process.[1]
+![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\left&space;(S,&space;A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;&space;\right&space;)" title="\left (S, A,r(s_{t},a_{t}),P(s_{t+1}|s_{t},a_{t}),\gamma \right ))
+
 
 
 ## Appendix
