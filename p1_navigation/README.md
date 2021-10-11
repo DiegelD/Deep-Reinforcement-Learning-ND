@@ -3,6 +3,7 @@
 [image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
 
 # Project 1: Navigation
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ## Abstract
 In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bannanas and leaves the bad black ones.
@@ -19,10 +20,19 @@ Prioritzed Experience Replay Agent combined with a Double DQNA Agent.
  <img src="./img/DRL_landscape.png" width="360" alt="BehaviourControl" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 1: Shematic placement in the reinforcement landscape.  </p> 
+ <p style="text-align: center;"> Fig. 1: Shematic alocation in the reinforcement landscape.  </p> 
  </figcaption>
 </figure>
  <p></p>
+
+Overview
+---
+1. Intro Reinforcment Learning
+2. Deep Reinforcment Learning  Q-learning
+3. Double Q-Learning
+4. Prioritzed Experience Replay
+5. Hyper Parameter tuning & Agent Comparison
+6. Appendix: *Build Instructions & Simulator* ...
 
 ## Appendix
 ### Introduction
