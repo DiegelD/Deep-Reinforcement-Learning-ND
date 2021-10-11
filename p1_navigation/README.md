@@ -48,7 +48,8 @@ These two characteristics -trail and error search and delayed reward are the two
 
 The problem fromalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
 Markov decision (MD) process.[1]
-![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\left&space;(S,&space;A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;&space;\right&space;)" title="\left (S, A,r(s_{t},a_{t}),P(s_{t+1}|s_{t},a_{t}),\gamma \right ))
+
+![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left&space;(S,&space;A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;&space;\right&space;)&space;)
 
 
 
