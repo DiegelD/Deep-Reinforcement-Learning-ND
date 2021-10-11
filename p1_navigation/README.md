@@ -7,7 +7,7 @@
 
 ## Abstract
 In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bannanas and leaves the bad black ones.
-Its done with a Vaulue Optimzation based unsupervised learning with DQNs(figure 1). It learns by itself the rules and control movements by just 
+Its done with a Vaulue Optimzation based learning with DQNs(figure 1). It learns by itself the rules and control movements by just 
 given feedback/reward for the collected banna. 
 
 In the first step of the development der Hyper Parameters of the Epsilon gradient and a suitable Batchsizes are figured out. 
@@ -27,12 +27,26 @@ Prioritzed Experience Replay Agent combined with a Double DQNA Agent.
 
 Overview
 ---
-1. Intro Reinforcment Learning
-2. Deep Reinforcment Learning  Q-learning
+1. Intro Reinforcement Learning
+2. Deep Reinforcement Learning Q-learning
 3. Double Q-Learning
 4. Prioritzed Experience Replay
 5. Hyper Parameter tuning & Agent Comparison
 6. Appendix: *Build Instructions & Simulator* ...
+
+## 1) Intro Reinforcement Learning
+The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
+has no explicit teacher, but it does have a direct sensorimotor connection to its environment. Exercising this connection produces a wealth of information about
+cause and effect, about the consequences of actions, and about what to do in order to achieve goals. Throughout our lives, such interaction are undoubtedly a major source of knowledge
+about our environment and ourself. Whether we are learning to drive a car to hold conversation, we are acutely aware of how our environment responds
+to what we do, and we seek to influence what happens through our behavior. Learning from interaction is a foundational idea underlaying nearly all theories of learning and
+intelligence.[1]
+
+Reinforcement learning is learning what to do - how to map situation to action --so as to maximize a numerical rewards signal. The learner is not told which actions to take, but instead must discover which actions yield the most rewards by
+trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.
+These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
+
+
 
 ## Appendix
 ### Introduction
