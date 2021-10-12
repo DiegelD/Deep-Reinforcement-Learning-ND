@@ -70,15 +70,26 @@ a deep Q-network, that can learn sucessful policies directly from high-dimensina
 So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
 However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence there is on observation space vector 
 of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction and 4 discreate action space values.
+More infromation about the environoment can be found in the appendix.
+
 
 <figure>
- <img src="./img/Net.png" width="500" alt=Net" />
+ <img src="./img/Net.png" width="500" alt="Net" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 2: Shematic illustration of the neural network.  </p> 
  </figcaption>
 </figure>
  <p></p>
+
+ Formally the neural network is used to approximate the optimal action value function
+ ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
+
+ wich is the maximum sum of rewars *rt* discounted by y at each time step t. achievable by a behaviour polica pi=P(a|s), after making an observation (s)
+ and taking an action (a). Teinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approyimator such as a 
+ neuronal network is used to represent the action-vale (also known as Q) function. This instability is corrected by using experience replay and 
+ Q-fixed target.[3]
+
 
 ## Appendix
 ### Citation
