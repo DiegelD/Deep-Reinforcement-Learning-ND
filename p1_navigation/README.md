@@ -60,9 +60,32 @@ this process the agent interacts with the environment and obtains trajectory ![e
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
 ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
 where ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
-future reward.
+future reward.[2]
+
+## 2) Deep Reinforcement Learning (Deep Q-Networks)
+While reinforcement learning agents have achived some succes in a variety of domains, their applicability has previously been limited to domains in 
+which useful features can be handcrafted. Here we use recent advances in training deep neural networks to develop a novel artificial agent, termed
+a deep Q-network, that can learn sucessful policies directly from high-dimensinal sensory inputs using end to end reinforcement learning. [3]
+
+So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
+However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence there is on observation space vector 
+of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction and 4 discreate action space values.
+
+<figure>
+ <img src="./img/Net.png" width="500" alt=Net" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 2: Shematic illustration of the neural network.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
 
 ## Appendix
+### Citation
+[1]Reinforcement Learning, Sutton & Barton <br />
+[2]Reinforcement Learning and Deep Learning based Lateral Control for Autonomous Driving [Link](https://arxiv.org/abs/1810.12778) <br />
+[3]Human-level control through deep reinforcement learning [Link](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) <br />
+
 ### Introduction
 
 For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
