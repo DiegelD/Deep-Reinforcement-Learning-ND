@@ -92,8 +92,8 @@ More infromation about the environoment can be found in the appendix.
  Q-fixed target.[3]
 
 ## 3) Double Q-Learning 
-The popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
-learning algorithms, but it is knwon to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
+TThe popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
+learning algorithms, but it is known to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
 prefer overestimated to underestimated values. [4]
 
 To focus on this problem, lets look at the updated rule for Q-Learning and focus on the TD target. Here the max operation is necessary to
@@ -103,7 +103,41 @@ find the best possible value for the next state.
  <img src="./img/DoubleDQN_tdtarget.png" width="350" alt="DoubleDQN" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 3: Update equation Q-Learning.  </p> 
+ <p style="text-align: center;"> Fig. 3.1: Update equation Q-Learning.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+lets rewrite the target and expend the operation. Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
+ and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
+ mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
+ our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
+ since we always pick the maximum among a set of noisy numbers.
+ 
+<figure>
+ <img src="./img/DoubleDQN_expanded.png" width="350" alt="DoubleDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3.2: Update equation Q-Learning expanded.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+To make the estimate more robust a double Q-Learning algorithm can be used. Where we select the best action using  on set of parameters *w*, but evaluate it
+using a different set of parameters *w'*. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
+according to *w'*, then the Q-value returned is not that high. In the long run, this prevents the algorithm from propagating incidental high rewards
+that may have been obtained by chance and don't reflect long-term returns.<br />
+Where do we get the second set of parameters from? In the original formulation of Double Q-Learning, you would basically maintain two value functions
+and randomly choose one of them to update at each step and using the other only for evaluating actions. But we using DQNs with fixed Q targets, so
+we already have an alternate set of parameters. Remember *w^-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
+reused for this purpose. And thats it, this simple modification keeps Q-values in check, preventing them from exploding in early stages of learning or
+fluctuating later on
+
+<figure>
+ <img src="./img/DoubleDQN_update.png" width="350" alt="DoubleDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
  </figcaption>
 </figure>
  <p></p>
