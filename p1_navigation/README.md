@@ -30,7 +30,7 @@ Overview
 1. Intro Reinforcement Learning
 2. Deep Reinforcement Learning Q-learning
 3. Double Q-Learning
-4. Prioritzed Experience Replay
+4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison
 6. Appendix: *Build Instructions & Simulator* ...
 
@@ -186,7 +186,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="150" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="50" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -215,6 +215,32 @@ these weights are more important towards the end of learning when your q values 
 </figure>
  <p></p>
 
+## 5) Hyper Parameter tuning & Agent Comparison
+The final chapter is devided in three parts. Beginning with tuning of the hyper paramters of the greedy gradient and buffer size and finnishing 
+with the comparison of the above desrcibt agents. 
+
+The two parameters are randomly selected out of the variety of paramteres that could be modifyed. 
+The Greddy gradient, the greedy action represent the dilemma betwwen Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
+the expected reward on the one step, but exploration may produce the greater total reward in the long run[1].
+
+One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the nongreed actions and discover  which 
+of them are better than the greedy action. Reward is lowever in the short run, during  exploration, but higher in the long run.
+This could be done by a linearly decay *eps=1.0->0.1* with a stedy declanation after every step with the equation below, for example. 
+
+![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
+
+So figure 5 shows the variety of epsilons. Since the goal for this challange is to find parameters that in average reach 13 bananas
+as fast as possible with a max horizon of 1800 episods an epsilon decay with 0.98 suites this best. 
+
+
+<figure>
+ <img src="./img/Conclusion.png" width="500" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 5: Results of the experiments.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
 
 ## Appendix
 ### Citation
