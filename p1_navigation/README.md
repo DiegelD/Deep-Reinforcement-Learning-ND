@@ -147,6 +147,35 @@ Online reinforcement learning (RL) agents incrementally update their parameters 
 In their simplest from, they discard incomming data immediatly, after a signle update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochatic 
 gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be usefull later on.[5]
 
+LEts recall the basic idea behind experience replay. The Agent interact with the envrionoment to collect eyperience tuples <S,A,R....>, save
+them in a buffer, and then later reandamly sample a batch to learn from. This helps to break the correlation between  consecutie sxperienaces and
+stabilizes our learning algorithm.<br />
+Now Prioritzed Experience Replay comes into play, some of these experiences may be more importent for learning than others and may occur infrequently.
+Since buffers are practically limited in capacity older may importend experiences get lost. This is where Prioritzed Experience Replay helps.
+<figure>
+ <img src="./img/experiance_replay.png" width="350" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 4.1: Experiance Replay working principle.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+One approach to assigin the priorities for the tupls, is to use the TD error delta. The bigger the error the more we expect to learn from that tuple.
+So lets take the magintude of this error as a measure of priority and stor it along with each vorresponding tuple in the replay buffer.
+By using batachs, as we do, we can use sampling probablities. Select any tuple *i* with a probabilty equal to its priority value PI normalize
+by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a neqly computed TD error using
+the lates q values.This reduce the number of batch updates needed to learn a value function.
+
+<figure>
+ <img src="./img/per_buffer.png" width="350" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 4.2: Experiance Replay Buffer.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
 
 ## Appendix
 ### Citation
