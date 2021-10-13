@@ -83,19 +83,37 @@ More infromation about the environoment can be found in the appendix.
  <p></p>
 
  Formally the neural network is used to approximate the optimal action value function
+
  ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
 
- wich is the maximum sum of rewars *rt* discounted by y at each time step t. achievable by a behaviour polica pi=P(a|s), after making an observation (s)
- and taking an action (a). Teinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approyimator such as a 
+ wich is the maximum sum of rewars *rt* discounted by y at each time step t. Achievable by a behaviour policy pi=P(a|s), after making an observation *(s)*
+ and taking an action *(a)*. Reinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approximator such as a 
  neuronal network is used to represent the action-vale (also known as Q) function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
 
+## 3) Double Q-Learning 
+The popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
+learning algorithms, but it is knwon to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
+prefer overestimated to underestimated values. [4]
+
+To focus on this problem, lets look at the updated rule for Q-Learning and focus on the TD target. Here the max operation is necessary to
+find the best possible value for the next state.
+
+<figure>
+ <img src="./img/DoubleDQN_tdtarget.png" width="350" alt="DoubleDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3: Update equation Q-Learning.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
 
 ## Appendix
 ### Citation
 [1]Reinforcement Learning, Sutton & Barton <br />
 [2]Reinforcement Learning and Deep Learning based Lateral Control for Autonomous Driving [Link](https://arxiv.org/abs/1810.12778) <br />
 [3]Human-level control through deep reinforcement learning [Link](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) <br />
+[4]Deep Reinforcement Learning with Double Q-Learning [Link](https://arxiv.org/abs/1509.06461) <br />
 
 ### Introduction
 
