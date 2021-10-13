@@ -142,36 +142,85 @@ fluctuating later on
 </figure>
  <p></p>
 
- ## 4) Prioritzed Experience Replay
-Online reinforcement learning (RL) agents incrementally update their parameters (of the policy, value function or model) while they observe a stream of experience.
-In their simplest from, they discard incomming data immediatly, after a signle update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochatic 
-gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be usefull later on.[5]
 
-LEts recall the basic idea behind experience replay. The Agent interact with the envrionoment to collect eyperience tuples <S,A,R....>, save
-them in a buffer, and then later reandamly sample a batch to learn from. This helps to break the correlation between  consecutie sxperienaces and
+ ## 4) Prioritized Experience Replay (PER)
+Online reinforcement learning (RL) agents incrementally update their parameters (of the policy, value function or model) while they observe a stream of experience.
+In their simplest from, they discard incoming data immediately, after a single update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochastic 
+gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be useful later on.[5]
+
+Let's recall the basic idea behind experience replay. The Agent interact with the environment to collect experience tuples <S,A,R....>, save
+them in a buffer, and then later randomly sample a batch to learn from. This helps to break the correlation between  consecutive experiences and
 stabilizes our learning algorithm.<br />
-Now Prioritzed Experience Replay comes into play, some of these experiences may be more importent for learning than others and may occur infrequently.
-Since buffers are practically limited in capacity older may importend experiences get lost. This is where Prioritzed Experience Replay helps.
+Now Prioritized Experience Replay comes into play, some of these experiences may be more important for learning than others and may occur infrequently.
+Since buffers are practically limited in capacity older may imported experiences get lost. This is where Prioritized Experience Replay helps.
 <figure>
  <img src="./img/experiance_replay.png" width="350" alt="PerDQN" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 4.1: Experiance Replay working principle.  </p> 
+ <p style="text-align: center;"> Fig. 4.1: Experience Replay working principle.  </p> 
  </figcaption>
 </figure>
  <p></p>
 
-One approach to assigin the priorities for the tupls, is to use the TD error delta. The bigger the error the more we expect to learn from that tuple.
-So lets take the magintude of this error as a measure of priority and stor it along with each vorresponding tuple in the replay buffer.
-By using batachs, as we do, we can use sampling probablities. Select any tuple *i* with a probabilty equal to its priority value PI normalize
-by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a neqly computed TD error using
+One approach to assign the priorities for the tuples, is to use the TD error delta. The bigger the error the more we expect to learn from that tuple.
+So let's take the magnitude of this error as a measure of priority and store it along with each corresponding tuple in the replay buffer.
+By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value PI normalize
+by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a newly computed TD error using
 the lates q values.This reduce the number of batch updates needed to learn a value function.
 
 <figure>
  <img src="./img/per_buffer.png" width="350" alt="PerDQN" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 4.2: Experiance Replay Buffer.  </p> 
+ <p style="text-align: center;"> Fig. 4.2: Experience Replay Buffer.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+First note, that if the TD error is zero than the priority value of the tuple enhance its probability of being picked will also be zero.
+Zero or very low TD error doesn't necessarily mean we have nothing more to learn from such a tuple, it might be the case that our estimate was
+close due to the limited samples we visited till that point. So to prevent such tuples from being starved for selection we can add a small 
+constant e to every priority value.Another issue along similar lines is that greedily using these priority values may lead to a small subset of 
+experiences being replayed over and over resulting in a overfitting to that subset. To avoid this, we reintroduce some elements of uniform random sampling.
+This adds another hyper parameter A which we use to redefine the sampling probability as priority *PI* to the power *A* divided by the sum of all priorities *Pk*
+each raised to the power *a*.
+
+<figure>
+ <img src="./img/per_sampling_probability.png" width="350" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+We can control how much we want to use priorities versus randomness by varying this parameter *a*. Where *a=0* corresponds to pure
+uniforme randomness and *a* equals one only uses priorities.<br />
+
+When we are using *Per*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
+all experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
+This is preserved when we sample experience tuples uniformly from the replay buffer. But this assumption is violated when we use a non-uniform sampling, 
+like priorities. The q values we learn will be biased according to these priority values which we only wanted to use for sampling. To correct for
+this bias, we need to introduce an impotent sampling weight equal to one over *n*, where *n* is the size of this replay buffer, times one over the sampling 
+probability *PI*.<br />
+We can add another hyper parameter *b* ad raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
+these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
+
+<figure>
+ <img src="./img/per_updaterule.png" width="350" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 4.4: Experience Replay update rule.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+
+<figure>
+ <img src="./img/DoubleDQN_update.png" width="350" alt="DoubleDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
  </figcaption>
 </figure>
  <p></p>
