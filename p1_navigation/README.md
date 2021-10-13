@@ -32,6 +32,11 @@ Overview
 3. Double Q-Learning
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison
+    5.1 Hyperparameter
+        5.1.1 Epsilon declay
+        5.1.2 Buffersize
+    5.2 Agent Comparinson
+    5.3 Result Diagram
 6. Appendix: *Build Instructions & Simulator* ...
 
 ## 1) Intro Reinforcement Learning
@@ -134,7 +139,7 @@ reused for this purpose. And thats it, this simple modification keeps Q-values i
 fluctuating later on
 
 <figure>
- <img src="./img/DoubleDQN_update.png" width="350" alt="DoubleDQN" />
+ <img src="./img/DoubleDQN_update.png" width="250" alt="DoubleDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
@@ -186,7 +191,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="85" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="90" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -240,13 +245,14 @@ saved experience.<br />
 So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. So the Buffer size of 1e5 experiences
 is taken for further testing since it performs slightly better than the 1e4 buffer and takes less computational time than the 1e6 buffer. 
 
-### 5.1 Agent Comparison
-
+### 5.2 Agent Comparison
 Actually an expected behavior would be that the PER-DQN Agent performs best and then in decay order the Double-DQN and last the DQN algorithms.
 However the results looks different. Here the DQN is learning the fastest and the Double-DQN reaches in total the highes scores.
 The the question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
 is hitting the best values.
+
+### 5.3 Result Diagram
 
 <figure>
  <img src="./img/Conclusion.png" width="500" alt="PerDQN" />
