@@ -242,8 +242,10 @@ as fast as possible with a max horizon of 1800 episods an epsilon decay with 0.9
 #### 5.1.2 Buffer size
 The buffer size plays influences the hardware store design and des over all learning time. Since a bigger buffer takes longer to scan for 
 saved experience.<br />
-So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. So the Buffer size of 1e5 experiences
-is taken for further testing since it performs slightly better than the 1e4 buffer and takes less computational time than the 1e6 buffer. 
+So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. They have all more or less the same 
+same learning inclination and in he saturation are its seen that the bigger the buffer the smoother oscillation.<br />
+So the Buffer size of 1e5 experiences is chosen for further testing since it performs slightly better than the 1e4 buffer and takes less 
+computational time than the 1e6 buffer. 
 
 ### 5.2 Agent Comparison
 Actually an expected behavior would be that the PER-DQN Agent performs best and then in decay order the Double-DQN and last the DQN algorithms.
