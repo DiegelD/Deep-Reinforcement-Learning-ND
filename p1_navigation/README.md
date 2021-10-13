@@ -91,7 +91,7 @@ More infromation about the environoment can be found in the appendix.
  neuronal network is used to represent the action-vale (also known as Q) function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
 
-## 3) Double Q-Learning 
+## 3) Double Q-Learning (Double DQN)
 TThe popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
 learning algorithms, but it is known to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
 prefer overestimated to underestimated values. [4]
@@ -142,12 +142,19 @@ fluctuating later on
 </figure>
  <p></p>
 
+ ## 4) Prioritzed Experience Replay
+Online reinforcement learning (RL) agents incrementally update their parameters (of the policy, value function or model) while they observe a stream of experience.
+In their simplest from, they discard incomming data immediatly, after a signle update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochatic 
+gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be usefull later on.[5]
+
+
 ## Appendix
 ### Citation
 [1]Reinforcement Learning, Sutton & Barton <br />
 [2]Reinforcement Learning and Deep Learning based Lateral Control for Autonomous Driving [Link](https://arxiv.org/abs/1810.12778) <br />
 [3]Human-level control through deep reinforcement learning [Link](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) <br />
 [4]Deep Reinforcement Learning with Double Q-Learning [Link](https://arxiv.org/abs/1509.06461) <br />
+[5]Prioritized Experience Replay [Link](https://arxiv.org/abs/1511.05952) <br />
 
 ### Introduction
 
