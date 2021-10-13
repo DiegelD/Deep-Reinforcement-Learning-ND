@@ -186,7 +186,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="250" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="150" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
