@@ -186,7 +186,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="350" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="250" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -207,20 +207,10 @@ We can add another hyper parameter *b* ad raise each important sampling weight t
 these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
 
 <figure>
- <img src="./img/per_updaterule.png" width="350" alt="PerDQN" />
+ <img src="./img/per_update_rule.png" width="350" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.4: Experience Replay update rule.  </p> 
- </figcaption>
-</figure>
- <p></p>
-
-
-<figure>
- <img src="./img/DoubleDQN_update.png" width="350" alt="DoubleDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
  </figcaption>
 </figure>
  <p></p>
