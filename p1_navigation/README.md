@@ -186,7 +186,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="75" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="85" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -207,7 +207,7 @@ We can add another hyper parameter *b* ad raise each important sampling weight t
 these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
 
 <figure>
- <img src="./img/per_update_rule.png" width="250" alt="PerDQN" />
+ <img src="./img/per_update_rule.png" width="200" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.4: Experience Replay update rule.  </p> 
@@ -240,8 +240,13 @@ saved experience.<br />
 So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. So the Buffer size of 1e5 experiences
 is taken for further testing since it performs slightly better than the 1e4 buffer and takes less computational time than the 1e6 buffer. 
 
+### 5.1 Agent Comparison
 
-
+Actually an expected behavior would be that the PER-DQN Agent performs best and then in decay order the Double-DQN and last the DQN algorithms.
+However the results looks different. Here the DQN is learning the fastest and the Double-DQN reaches in total the highes scores.
+The the question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
+Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
+is hitting the best values.
 
 <figure>
  <img src="./img/Conclusion.png" width="500" alt="PerDQN" />
