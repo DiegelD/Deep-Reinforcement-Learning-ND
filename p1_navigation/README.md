@@ -149,7 +149,7 @@ In their simplest from, they discard incoming data immediately, after a single u
 gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be useful later on.[5]
 
 Let's recall the basic idea behind experience replay. The Agent interact with the environment to collect experience tuples <S,A,R....>, save
-them in a buffer, and then later randomly sample a batch to learn from. This helps to break the correlation between  consecutive experiences and
+them in a buffer, and then later randomly sample a batch to learn from. This helps to break the correlation between consecutive experiences and
 stabilizes our learning algorithm.<br />
 Now Prioritized Experience Replay comes into play, some of these experiences may be more important for learning than others and may occur infrequently.
 Since buffers are practically limited in capacity older may imported experiences get lost. This is where Prioritized Experience Replay helps.
@@ -186,7 +186,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="50" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="75" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -207,7 +207,7 @@ We can add another hyper parameter *b* ad raise each important sampling weight t
 these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
 
 <figure>
- <img src="./img/per_update_rule.png" width="350" alt="PerDQN" />
+ <img src="./img/per_update_rule.png" width="250" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.4: Experience Replay update rule.  </p> 
@@ -219,6 +219,8 @@ these weights are more important towards the end of learning when your q values 
 The final chapter is devided in three parts. Beginning with tuning of the hyper paramters of the greedy gradient and buffer size and finnishing 
 with the comparison of the above desrcibt agents. 
 
+### 5.1) Hyperparameter 
+#### 5.1.1 Epsilon (declay)
 The two parameters are randomly selected out of the variety of paramteres that could be modifyed. 
 The Greddy gradient, the greedy action represent the dilemma betwwen Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
 the expected reward on the one step, but exploration may produce the greater total reward in the long run[1].
@@ -231,6 +233,14 @@ This could be done by a linearly decay *eps=1.0->0.1* with a stedy declanation a
 
 So figure 5 shows the variety of epsilons. Since the goal for this challange is to find parameters that in average reach 13 bananas
 as fast as possible with a max horizon of 1800 episods an epsilon decay with 0.98 suites this best. 
+
+#### 5.1.2 Buffer size
+The buffer size plays influences the hardware store design and des over all learning time. Since a bigger buffer takes longer to scan for 
+saved experience.<br />
+So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. So the Buffer size of 1e5 experiences
+is taken for further testing since it performs slightly better than the 1e4 buffer and takes less computational time than the 1e6 buffer. 
+
+
 
 
 <figure>
