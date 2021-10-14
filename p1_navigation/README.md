@@ -76,6 +76,7 @@ So in this project an implementation that is close to this [one](https://storage
 However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence the environment provides an observation space vector 
 of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction. As action space
 four discreate values can be taken. More infromation about the environoment can be found in the appendix.<br />
+
 Picture 2 illustrates the end to end learning of the neuronal net, with the dimensons of the net. The agent by it self trains the net with
 its actions. 
 
@@ -91,15 +92,16 @@ its actions.
 
  Formally the neural network is used to approximate the optimal action value function
 
- ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
+ ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
 
- wich is the maximum sum of rewars *rt* discounted by y at each time step t. Achievable by a behaviour policy pi=P(a|s), after making an observation *(s)*
+ wich is the maximum sum of rewars *rt* discounted by y at each time step *t*. Achievable by a behaviour policy
+ &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{110}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
  and taking an action *(a)*. Reinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approximator such as a 
- neuronal network is used to represent the action-vale (also known as Q) function. This instability is corrected by using experience replay and 
+ neuronal network is used to represent the action-value, also known as Q-function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
 
 ## 3) Double Q-Learning (Double DQN)
-TThe popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
+The popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
 learning algorithms, but it is known to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
 prefer overestimated to underestimated values. [4]
 
@@ -115,7 +117,7 @@ find the best possible value for the next state.
 </figure>
  <p></p>
 
-lets rewrite the target and expend the operation. Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
+lets rewrite the target and expend the operation (fig. 3.2). Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
  and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
  mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
  our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
@@ -131,12 +133,12 @@ lets rewrite the target and expend the operation. Its just a more efficient way 
  <p></p>
 
 To make the estimate more robust a double Q-Learning algorithm can be used. Where we select the best action using  on set of parameters *w*, but evaluate it
-using a different set of parameters *w'*. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
+using a different set of parameters *w'* (fig. 3.3). It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
 according to *w'*, then the Q-value returned is not that high. In the long run, this prevents the algorithm from propagating incidental high rewards
 that may have been obtained by chance and don't reflect long-term returns.<br />
 Where do we get the second set of parameters from? In the original formulation of Double Q-Learning, you would basically maintain two value functions
 and randomly choose one of them to update at each step and using the other only for evaluating actions. But we using DQNs with fixed Q targets, so
-we already have an alternate set of parameters. Remember *w^-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
+we already have an alternate set of parameters. Remember *w-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
 reused for this purpose. And thats it, this simple modification keeps Q-values in check, preventing them from exploding in early stages of learning or
 fluctuating later on
 
