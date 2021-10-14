@@ -56,9 +56,9 @@ Markov decision (MD) process.[1]
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
 
-At time step *t*, the agent selects the action ![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;a_{t}\in&space;A) by following a police
-![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
-is transferred to the next state *st+1* with probabilities ![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;P(s_{t&plus;1}|s_{t},a_{t}).
+At time step *t*, the agent selects the action ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;a_{t}\in&space;A) by following a police
+![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
+is transferred to the next state *st+1* with probabilities ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
 Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})) is received to describe whether the underlying
 action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})). By repeating 
 this process the agent interacts with the environment and obtains trajectory ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T})
