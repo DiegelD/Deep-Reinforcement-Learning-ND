@@ -32,7 +32,7 @@ Overview
 3. Double Q-Learning
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison <br />
-    5.1 Hyperparameter <br />
+&emsp;5.1 Hyperparameter <br />
     &emsp;&emsp; 5.1.1 Epsilon declay <br />
     &emsp;&emsp; 5.1.2 Buffersize <br />
     5.2 Agent Comparinson <br />
