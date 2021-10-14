@@ -6,16 +6,17 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ## Abstract
-In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bannanas and leaves the bad black ones.
-Its done with a Vaulue Optimzation based learning with DQNs(figure 1). It learns by itself the rules and control movements by just 
-given feedback/reward for the collected banna. 
+In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bananas and leaves the bad black ones.
+Its done with a Value Optimization based learning with DQNs(figure 1). It learns model-free the rules of the game and the necessary control movements by 
+getting a reward for a collected banana. 
 
-In the first step of the development der Hyper Parameters of the Epsilon gradient and a suitable Batchsizes are figured out. 
-And in the following step the agend is compared against the performance of an Double DQN Agent and a 
-Prioritzed Experience Replay Agent combined with a Double DQNA Agent. 
+The development of the Agent was a two step process. First adjusting the given Agent from a former project to this project and also
+tuning the Hyperparameter, so that the task goal of hitting as fast as possible a score of 13 bananas in a least 1800 episodes is full-filled. 
+And the the second step of making an extra mile and implementing additional algorithms/modification and comparing them against the origin DQN
+Agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
-
+ 
 <figure>
  <img src="./img/DRL_landscape.png" width="360" alt="BehaviourControl" />
  <figcaption>
@@ -32,11 +33,11 @@ Overview
 3. Double Q-Learning
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison
-    5.1 Hyperparameter
-        5.1.1 Epsilon declay
-        5.1.2 Buffersize
-    5.2 Agent Comparinson
-    5.3 Result Diagram
+    5.1 Hyperparameter <br />
+        5.1.1 Epsilon declay <br />
+        5.1.2 Buffersize <br />
+    5.2 Agent Comparinson <br />
+    5.3 Result Diagram <br />
 6. Appendix: *Build Instructions & Simulator* ...
 
 ## 1) Intro Reinforcement Learning
