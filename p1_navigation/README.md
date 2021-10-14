@@ -7,12 +7,12 @@
 
 ## Abstract
 In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bananas and leaves bad (dark) ones.
-Its done with a Value Optimization based learning approach with DQNs(figure 1). It learns model-free the rules of the game and the necessary control movements by 
+Its done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
 getting a reward/punnishment for each collected banana. 
 
-The development of the agent was a two step process. First adjusting the given agent from a former project to this project and
-tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes ans fullfilling with it the priect requriements.
-The second step was the extra mile, implementing additional algorithms/modification and comparing them against the origin DQN agent.
+The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
+tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and fullfilling with it the project requriements.
+The second step is the extra mile, implementing additional algorithms/modification and comparing them against the origin DQN agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
@@ -31,7 +31,7 @@ Overview
 2. Deep Reinforcement Learning Q-learning
 3. Double Q-Learning
 4. Prioritized Experience Replay
-5. Hyper Parameter tuning & Agent Comparison
+5. Hyper Parameter tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
         5.1.1 Epsilon declay <br />
         5.1.2 Buffersize <br />
