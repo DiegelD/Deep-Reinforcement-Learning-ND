@@ -52,7 +52,7 @@ trying them. In the most interesting and challenging cases, actions may affect n
 These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
 
 The problem formalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
-Markov decision (MD) process.[1]
+Markov decision process.[1]
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
 
@@ -61,7 +61,7 @@ At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.
 is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
 Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
 action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains trajectory &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
+this process the agent interacts with the environment and obtains a behaviour &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
 ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
 where ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
@@ -69,13 +69,15 @@ future reward.[2]
 
 ## 2) Deep Reinforcement Learning (Deep Q-Networks)
 While reinforcement learning agents have achived some succes in a variety of domains, their applicability has previously been limited to domains in 
-which useful features can be handcrafted. Here we use recent advances in training deep neural networks to develop a novel artificial agent, termed
+which useful features can be handcrafted. Here we used recent advances in training deep neural networks to develop a novel artificial agent, termed
 a deep Q-network, that can learn sucessful policies directly from high-dimensinal sensory inputs using end to end reinforcement learning. [3]
 
 So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
-However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence there is on observation space vector 
-of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction and 4 discreate action space values.
-More infromation about the environoment can be found in the appendix.
+However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence the environment provides an observation space vector 
+of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction. As action space
+four discreate values can be taken. More infromation about the environoment can be found in the appendix.<br />
+Picture 2 illustrates the end to end learning of the neuronal net, with the dimensons of the net. The agent by it self trains the net with
+its actions. 
 
 
 <figure>
