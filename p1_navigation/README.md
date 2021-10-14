@@ -33,8 +33,8 @@ Overview
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
-            5.1.1 Epsilon declay <br />
-            5.1.2 Buffersize <br />
+        &emsp; 5.1.1 Epsilon declay <br />
+        &emsp; 5.1.2 Buffersize <br />
     5.2 Agent Comparinson <br />
     5.3 Result Diagram <br />
 6. Appendix: *Build Instructions & Simulator* ...
