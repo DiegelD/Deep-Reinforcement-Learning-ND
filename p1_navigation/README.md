@@ -133,7 +133,7 @@ lets rewrite the target and expend the operation (fig. 3.2). Its just a more eff
  <p></p>
 
 To make the estimate more robust a double Q-Learning algorithm can be used. Where we select the best action using  on set of parameters *w*, but evaluate it
-using a different set of parameters *w'* (fig. 3.3). It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
+using a different set of parameters *w'*, see figure below. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
 according to *w'*, then the Q-value returned is not that high. In the long run, this prevents the algorithm from propagating incidental high rewards
 that may have been obtained by chance and don't reflect long-term returns.<br />
 Where do we get the second set of parameters from? In the original formulation of Double Q-Learning, you would basically maintain two value functions
@@ -171,11 +171,11 @@ Since buffers are practically limited in capacity older may imported experiences
 </figure>
  <p></p>
 
-One approach to assign the priorities for the tuples, is to use the TD error delta. The bigger the error the more we expect to learn from that tuple.
+One approach to assign the priorities for the tuples, is to use the TD error delta (fig. 4.2). The bigger the error the more we expect to learn from that tuple.
 So let's take the magnitude of this error as a measure of priority and store it along with each corresponding tuple in the replay buffer.
-By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value PI normalize
+By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value *PI* normalize
 by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a newly computed TD error using
-the lates q values.This reduce the number of batch updates needed to learn a value function.
+the lates *q* values. This reduce the number of batch updates needed to learn a value function.
 
 <figure>
  <img src="./img/per_buffer.png" width="350" alt="PerDQN" />
@@ -206,13 +206,13 @@ each raised to the power *a*.
 We can control how much we want to use priorities versus randomness by varying this parameter *a*. Where *a=0* corresponds to pure
 uniforme randomness and *a* equals one only uses priorities.<br />
 
-When we are using *Per*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
-all experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
+When we are using *PER*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
+experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
 This is preserved when we sample experience tuples uniformly from the replay buffer. But this assumption is violated when we use a non-uniform sampling, 
 like priorities. The q values we learn will be biased according to these priority values which we only wanted to use for sampling. To correct for
 this bias, we need to introduce an impotent sampling weight equal to one over *n*, where *n* is the size of this replay buffer, times one over the sampling 
 probability *PI*.<br />
-We can add another hyper parameter *b* ad raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
+We can add another hyper parameter *b* and raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
 these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
 
 <figure>
@@ -225,36 +225,41 @@ these weights are more important towards the end of learning when your q values 
  <p></p>
 
 ## 5) Hyper Parameter tuning & Agent Comparison
-The final chapter is devided in three parts. Beginning with tuning of the hyper paramters of the greedy gradient and buffer size and finnishing 
+The final chapter is devided in two parts. Starting with the tuning of the hyper paramters of the greedy gradient declay and the buffer size change and finnishing 
 with the comparison of the above desrcibt agents. 
 
 ### 5.1) Hyperparameter 
-#### 5.1.1 Epsilon (declay)
-The two parameters are randomly selected out of the variety of paramteres that could be modifyed. 
-The Greddy gradient, the greedy action represent the dilemma betwwen Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
+The two parameters are chosen, because they have a severe influence to the system.<br />
+The **Greddy gradient** represent the dilemma between Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
 the expected reward on the one step, but exploration may produce the greater total reward in the long run[1].
-
 One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the nongreed actions and discover  which 
 of them are better than the greedy action. Reward is lowever in the short run, during  exploration, but higher in the long run.
-This could be done by a linearly decay *eps=1.0->0.1* with a stedy declanation after every step with the equation below, for example. 
+This could be done by a linearly decay *eps=1.0->0.1* with a stedy declay after every step with the equation below: 
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
 
-So figure 5 shows the variety of epsilons. Since the goal for this challange is to find parameters that in average reach 13 bananas
-as fast as possible with a max horizon of 1800 episods an epsilon decay with 0.98 suites this best. 
+The **buffer size** influences the hardware store design and the computional learning time. That means that a bigger buffer
+needs longer to scan the saved expirencs and to pick one of them.<br />
+
+#### 5.1.1 Epsilon (declay)
+So the expectation is to figure out a suitable degradation gradient that fits the project requirements. Therefore
+three values are tested, seen in image 5. Its seen that the  epsilon decay with 0.9975 takes the longes time to learn, that was also expected.
+Between eps 0.97 and 0.98 is the different much smaler eps=0.98 is performing slighly better. Because of this this value is chosen to continue 
+with the next experiements. 
 
 #### 5.1.2 Buffer size
-The buffer size plays influences the hardware store design and des over all learning time. Since a bigger buffer takes longer to scan for 
-saved experience.<br />
-So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. They have all more or less the same 
-same learning inclination and in he saturation are its seen that the bigger the buffer the smoother oscillation.<br />
-So the Buffer size of 1e5 experiences is chosen for further testing since it performs slightly better than the 1e4 buffer and takes less 
-computational time than the 1e6 buffer. 
+Its expected that a bigger buffer, for the none *PER* algorithms perfromce better. Due to more importend and infrequent expierence that can be stored.
+Moreover its would probably have a soother saturation with less oscilazion. <br />
+Three buffer sizes are tested, each with a 10 magnitute difference, image 5. 
+The Result is that the size seems to have less influence than the greedy gradient. They runs have all more or less the same 
+same learning inclination. However the expection that the bigger buffer have less ossiclation with fullfiled.<br />
+For the next tests the Buffer size of 1e5 is chosen, since it has a good trad off between performance and computational time. 
 
 ### 5.2 Agent Comparison
-Actually an expected behavior would be that the PER-DQN Agent performs best and then in decay order the Double-DQN and last the DQN algorithms.
+Actually an expected behavior would be that the PER-DQN Aaent performs best and then in decay order the Double-DQN and last the DQN algorithm.
 However the results looks different. Here the DQN is learning the fastest and the Double-DQN reaches in total the highes scores.
-The the question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
+
+The question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
 is hitting the best values.
 
