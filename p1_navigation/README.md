@@ -58,13 +58,13 @@ Markov decision (MD) process.[1]
 
 At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;a_{t}\in&space;A) &nbsp; by following a police
 &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
-is transferred to the next state *st+1* with probabilities ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
-Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})) is received to describe whether the underlying
-action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains trajectory ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T})
+is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
+Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
+action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
+this process the agent interacts with the environment and obtains trajectory &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
-![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
-where ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
+![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
+where ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
 future reward.[2]
 
 ## 2) Deep Reinforcement Learning (Deep Q-Networks)
