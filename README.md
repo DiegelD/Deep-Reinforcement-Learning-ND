@@ -6,13 +6,13 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ## Abstract
-In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bannanas and leaves the bad black ones.
-Its done with a Vaulue Optimzation based learning with DQNs(figure 1). It learns by itself the rules and control movements by just 
-given feedback/reward for the collected banna. 
+In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bananas and leaves bad (dark) ones.
+Its done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
+getting a reward/punnishment for each collected banana. 
 
-In the first step of the development der Hyper Parameters of the Epsilon gradient and a suitable Batchsizes are figured out. 
-And in the following step the agend is compared against the performance of an Double DQN Agent and a 
-Prioritzed Experience Replay Agent combined with a Double DQNA Agent. 
+The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
+tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and fullfilling with it the project requriements.
+The second step is the extra mile, implementing additional algorithms/modifications and comparing them against the origin DQN agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
@@ -31,7 +31,12 @@ Overview
 2. Deep Reinforcement Learning Q-learning
 3. Double Q-Learning
 4. Prioritized Experience Replay
-5. Hyper Parameter tuning & Agent Comparison
+5. Hyper Parameter tuning & Agent Comparison <br />
+    5.1 Hyperparameter <br />
+    &nbsp;&nbsp;&emsp; 5.1.1 Epsilon declay <br />
+    &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
+    5.2 Agent Comparinson <br />
+    5.3 Result Diagram <br />
 6. Appendix: *Build Instructions & Simulator* ...
 
 ## 1) Intro Reinforcement Learning
@@ -42,35 +47,38 @@ about our environment and ourself. Whether we are learning to drive a car to hol
 to what we do, and we seek to influence what happens through our behavior. Learning from interaction is a foundational idea underlaying nearly all theories of learning and
 intelligence.[1]
 
-Reinforcement learning is learning what to do - how to map situation to action --so as to maximize a numerical rewards signal. The learner is not told which actions to take, but instead must discover which actions yield the most rewards by
+Reinforcement learning is learning what to do - how to map situation to action -- so as to maximize a numerical rewards signal. The learner is not told which actions to take, but instead must discover which actions yield the most rewards by
 trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.
 These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
 
 The problem formalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
-Markov decision (MD) process.[1]
+Markov decision process.[1]
 
-![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
+![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
 
-At time step *t*, the agent selects the action ![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;a_{t}\in&space;A) by following a police
-![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
-is transferred to the next state *st+1* with probabilities ![equation](https://latex.codecogs.com/gif.image?\dpi{150}&space;P(s_{t&plus;1}|s_{t},a_{t}).
-Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})) is received to describe whether the underlying
-action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains trajectory ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T})
+At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;a_{t}\in&space;A) &nbsp; by following a police
+&nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
+is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
+Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
+action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
+this process the agent interacts with the environment and obtains a behaviour &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
-![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
-where ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
+![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
+where ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
 future reward.[2]
 
 ## 2) Deep Reinforcement Learning (Deep Q-Networks)
 While reinforcement learning agents have achived some succes in a variety of domains, their applicability has previously been limited to domains in 
-which useful features can be handcrafted. Here we use recent advances in training deep neural networks to develop a novel artificial agent, termed
+which useful features can be handcrafted. Here we used recent advances in training deep neural networks to develop a novel artificial agent, termed
 a deep Q-network, that can learn sucessful policies directly from high-dimensinal sensory inputs using end to end reinforcement learning. [3]
 
 So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
-However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence there is on observation space vector 
-of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction and 4 discreate action space values.
-More infromation about the environoment can be found in the appendix.
+However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence the environment provides an observation space vector 
+of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction. As action space
+four discreate values can be taken. More infromation about the environoment can be found in the appendix.<br />
+
+Picture 2 illustrates the end to end learning of the neuronal net, with the dimensons of the net. The agent by it self trains the net with
+its actions. 
 
 
 <figure>
@@ -84,15 +92,16 @@ More infromation about the environoment can be found in the appendix.
 
  Formally the neural network is used to approximate the optimal action value function
 
- ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
+ ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
 
- wich is the maximum sum of rewars *rt* discounted by y at each time step t. Achievable by a behaviour policy pi=P(a|s), after making an observation *(s)*
+ wich is the maximum sum of rewars *rt* discounted by y at each time step *t*. Achievable by a behaviour policy
+ &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{110}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
  and taking an action *(a)*. Reinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approximator such as a 
- neuronal network is used to represent the action-vale (also known as Q) function. This instability is corrected by using experience replay and 
+ neuronal network is used to represent the action-value, also known as Q-function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
 
 ## 3) Double Q-Learning (Double DQN)
-TThe popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
+The popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
 learning algorithms, but it is known to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
 prefer overestimated to underestimated values. [4]
 
@@ -108,7 +117,7 @@ find the best possible value for the next state.
 </figure>
  <p></p>
 
-lets rewrite the target and expend the operation. Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
+lets rewrite the target and expend the operation (fig. 3.2). Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
  and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
  mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
  our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
@@ -124,17 +133,17 @@ lets rewrite the target and expend the operation. Its just a more efficient way 
  <p></p>
 
 To make the estimate more robust a double Q-Learning algorithm can be used. Where we select the best action using  on set of parameters *w*, but evaluate it
-using a different set of parameters *w'*. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
+using a different set of parameters *w'*, see figure below. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
 according to *w'*, then the Q-value returned is not that high. In the long run, this prevents the algorithm from propagating incidental high rewards
 that may have been obtained by chance and don't reflect long-term returns.<br />
 Where do we get the second set of parameters from? In the original formulation of Double Q-Learning, you would basically maintain two value functions
 and randomly choose one of them to update at each step and using the other only for evaluating actions. But we using DQNs with fixed Q targets, so
-we already have an alternate set of parameters. Remember *w^-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
+we already have an alternate set of parameters. Remember *w-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
 reused for this purpose. And thats it, this simple modification keeps Q-values in check, preventing them from exploding in early stages of learning or
 fluctuating later on
 
 <figure>
- <img src="./img/DoubleDQN_update.png" width="350" alt="DoubleDQN" />
+ <img src="./img/DoubleDQN_update.png" width="250" alt="DoubleDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
@@ -162,11 +171,11 @@ Since buffers are practically limited in capacity older may imported experiences
 </figure>
  <p></p>
 
-One approach to assign the priorities for the tuples, is to use the TD error delta. The bigger the error the more we expect to learn from that tuple.
+One approach to assign the priorities for the tuples, is to use the TD error delta (fig. 4.2). The bigger the error the more we expect to learn from that tuple.
 So let's take the magnitude of this error as a measure of priority and store it along with each corresponding tuple in the replay buffer.
-By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value PI normalize
+By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value *PI* normalize
 by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a newly computed TD error using
-the lates q values.This reduce the number of batch updates needed to learn a value function.
+the lates *q* values. This reduce the number of batch updates needed to learn a value function.
 
 <figure>
  <img src="./img/per_buffer.png" width="350" alt="PerDQN" />
@@ -186,7 +195,7 @@ This adds another hyper parameter A which we use to redefine the sampling probab
 each raised to the power *a*.
 
 <figure>
- <img src="./img/per_sampling_probability.png" width="85" alt="PerDQN" />
+ <img src="./img/per_sampling_probability.png" width="90" alt="PerDQN" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
@@ -197,13 +206,13 @@ each raised to the power *a*.
 We can control how much we want to use priorities versus randomness by varying this parameter *a*. Where *a=0* corresponds to pure
 uniforme randomness and *a* equals one only uses priorities.<br />
 
-When we are using *Per*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
-all experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
+When we are using *PER*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
+experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
 This is preserved when we sample experience tuples uniformly from the replay buffer. But this assumption is violated when we use a non-uniform sampling, 
 like priorities. The q values we learn will be biased according to these priority values which we only wanted to use for sampling. To correct for
 this bias, we need to introduce an impotent sampling weight equal to one over *n*, where *n* is the size of this replay buffer, times one over the sampling 
 probability *PI*.<br />
-We can add another hyper parameter *b* ad raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
+We can add another hyper parameter *b* and raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
 these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
 
 <figure>
@@ -216,37 +225,45 @@ these weights are more important towards the end of learning when your q values 
  <p></p>
 
 ## 5) Hyper Parameter tuning & Agent Comparison
-The final chapter is devided in three parts. Beginning with tuning of the hyper paramters of the greedy gradient and buffer size and finnishing 
+The final chapter is devided in two parts. Starting with the tuning of the hyper paramters of the greedy gradient declay and the buffer size change and finnishing 
 with the comparison of the above desrcibt agents. 
 
 ### 5.1) Hyperparameter 
-#### 5.1.1 Epsilon (declay)
-The two parameters are randomly selected out of the variety of paramteres that could be modifyed. 
-The Greddy gradient, the greedy action represent the dilemma betwwen Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
+The two parameters are chosen, because they have a severe influence to the system.<br />
+The **Greddy gradient** represent the dilemma between Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
 the expected reward on the one step, but exploration may produce the greater total reward in the long run[1].
-
 One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the nongreed actions and discover  which 
 of them are better than the greedy action. Reward is lowever in the short run, during  exploration, but higher in the long run.
-This could be done by a linearly decay *eps=1.0->0.1* with a stedy declanation after every step with the equation below, for example. 
+This could be done by a linearly decay *eps=1.0->0.1* with a stedy declay after every step with the equation below: 
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
 
-So figure 5 shows the variety of epsilons. Since the goal for this challange is to find parameters that in average reach 13 bananas
-as fast as possible with a max horizon of 1800 episods an epsilon decay with 0.98 suites this best. 
+The **buffer size** influences the hardware store design and the computional learning time. That means that a bigger buffer
+needs longer to scan the saved expirencs and to pick one of them.<br />
+
+#### 5.1.1 Epsilon (declay)
+So the expectation is to figure out a suitable degradation gradient that fits the project requirements. Therefore
+three values are tested, seen in image 5. Its seen that the  epsilon decay with 0.9975 takes the longes time to learn, that was also expected.
+Between eps 0.97 and 0.98 is the different much smaler eps=0.98 is performing slighly better. Because of this this value is chosen to continue 
+with the next experiements. 
 
 #### 5.1.2 Buffer size
-The buffer size plays influences the hardware store design and des over all learning time. Since a bigger buffer takes longer to scan for 
-saved experience.<br />
-So three buffer sizes are tested. It seems that the size don't have such big influence like the greedy gradient. So the Buffer size of 1e5 experiences
-is taken for further testing since it performs slightly better than the 1e4 buffer and takes less computational time than the 1e6 buffer. 
+Its expected that a bigger buffer, for the none *PER* algorithms perfromce better. Due to more importend and infrequent expierence that can be stored.
+Moreover its would probably have a soother saturation with less oscilazion. <br />
+Three buffer sizes are tested, each with a 10 magnitute difference, image 5. 
+The Result is that the size seems to have less influence than the greedy gradient. They runs have all more or less the same 
+same learning inclination. However the expection that the bigger buffer have less ossiclation with fullfiled.<br />
+For the next tests the Buffer size of 1e5 is chosen, since it has a good trad off between performance and computational time. 
 
-### 5.1 Agent Comparison
-
-Actually an expected behavior would be that the PER-DQN Agent performs best and then in decay order the Double-DQN and last the DQN algorithms.
+### 5.2 Agent Comparison
+Actually an expected behavior would be that the PER-DQN Aaent performs best and then in decay order the Double-DQN and last the DQN algorithm.
 However the results looks different. Here the DQN is learning the fastest and the Double-DQN reaches in total the highes scores.
-The the question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
+
+The question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
 is hitting the best values.
+
+### 5.3 Result Diagram
 
 <figure>
  <img src="./img/Conclusion.png" width="500" alt="PerDQN" />
