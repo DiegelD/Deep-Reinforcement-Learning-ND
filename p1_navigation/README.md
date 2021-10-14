@@ -12,7 +12,7 @@ getting a reward/punnishment for each collected banana.
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
 tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and fullfilling with it the project requriements.
-The second step is the extra mile, implementing additional algorithms/modification and comparing them against the origin DQN agent.
+The second step is the extra mile, implementing additional algorithms/modifications and comparing them against the origin DQN agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
@@ -33,8 +33,8 @@ Overview
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
-        5.1.1 Epsilon declay <br />
-        5.1.2 Buffersize <br />
+            5.1.1 Epsilon declay <br />
+            5.1.2 Buffersize <br />
     5.2 Agent Comparinson <br />
     5.3 Result Diagram <br />
 6. Appendix: *Build Instructions & Simulator* ...
