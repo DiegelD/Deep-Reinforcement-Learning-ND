@@ -7,11 +7,11 @@
 
 ## Abstract
 In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bananas and leaves bad (dark) ones.
-Its done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
-getting a reward/punnishment for each collected banana. 
+It's done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
+getting a reward/punishment for each collected banana. 
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
-tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and fullfilling with it the project requriements.
+tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and full-filling with it the project requirements.
 The second step is the extra mile, implementing additional algorithms/modifications and comparing them against the origin DQN agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
@@ -20,10 +20,11 @@ The second step is the extra mile, implementing additional algorithms/modificati
  <img src="./img/DRL_landscape.png" width="360" alt="BehaviourControl" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 1: Shematic alocation in the reinforcement landscape.  </p> 
+ <p style="text-align: center;"> Fig. 1: Schematic allocation in the reinforcement landscape.  </p> 
  </figcaption>
 </figure>
  <p></p>
+
 
 Overview
 ---
@@ -33,9 +34,9 @@ Overview
 4. Prioritized Experience Replay
 5. Hyper Parameter tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
-    &nbsp;&nbsp;&emsp; 5.1.1 Epsilon declay <br />
+    &nbsp;&nbsp;&emsp; 5.1.1 Epsilon decay <br />
     &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
-    5.2 Agent Comparinson <br />
+    5.2 Agent Comparison <br />
     5.3 Result Diagram <br />
 6. Appendix: *Build Instructions & Simulator* ...
 
@@ -61,23 +62,23 @@ At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.
 is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
 Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
 action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains a behaviour &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
+this process the agent interacts with the environment and obtains a behavior &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
 ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
 where ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
 future reward.[2]
 
 ## 2) Deep Reinforcement Learning (Deep Q-Networks)
-While reinforcement learning agents have achived some succes in a variety of domains, their applicability has previously been limited to domains in 
+While reinforcement learning agents have achieved some success in a variety of domains, their applicability has previously been limited to domains in 
 which useful features can be handcrafted. Here we used recent advances in training deep neural networks to develop a novel artificial agent, termed
-a deep Q-network, that can learn sucessful policies directly from high-dimensinal sensory inputs using end to end reinforcement learning. [3]
+a deep Q-network, that can learn successful policies directly from high-dimensional sensory inputs using end to end reinforcement learning. [3]
 
 So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
-However instead of using Convoluional layers, a less camputional network of 3 Neuronal Networks is used. Hence the environment provides an observation space vector 
-of 37 deminsions that contains the agents velocit, along with ray-based perception of objects around agents forward direction. As action space
-four discreate values can be taken. More infromation about the environoment can be found in the appendix.<br />
+However instead of using Convolutional layers, a less computational network of 3 Neuronal Networks is used. Hence the environment provides an observation space vector 
+of 37 dimensions that contains the agents velocity, along with ray-based perception of objects around agents forward direction. As action space
+four discrete values can be taken. More information about the environment can be found in the appendix.<br />
 
-Picture 2 illustrates the end to end learning of the neuronal net, with the dimensons of the net. The agent by it self trains the net with
+Picture 2 illustrates the end to end learning of the neuronal net, with the dimensions of the net. The agent by it self trains the net with
 its actions. 
 
 
@@ -85,7 +86,7 @@ its actions.
  <img src="./img/Net.png" width="500" alt="Net" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2: Shematic illustration of the neural network.  </p> 
+ <p style="text-align: center;"> Fig. 2: Schematic illustration of the neural network.  </p> 
  </figcaption>
 </figure>
  <p></p>
@@ -94,9 +95,9 @@ its actions.
 
  ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
 
- wich is the maximum sum of rewars *rt* discounted by y at each time step *t*. Achievable by a behaviour policy
+ wich is the maximum sum of rewards *rt* discounted by y at each time step *t*. Achievable by a behavior policy
  &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{110}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
- and taking an action *(a)*. Reinforment learning is kwon to be unstable or even to diverge when a nonlinear funtion approximator such as a 
+ and taking an action *(a)*. Reinforcement learning is kwon to be unstable or even to diverge when a nonlinear function approximator such as a 
  neuronal network is used to represent the action-value, also known as Q-function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
 
@@ -189,7 +190,7 @@ the lates *q* values. This reduce the number of batch updates needed to learn a 
 First note, that if the TD error is zero than the priority value of the tuple enhance its probability of being picked will also be zero.
 Zero or very low TD error doesn't necessarily mean we have nothing more to learn from such a tuple, it might be the case that our estimate was
 close due to the limited samples we visited till that point. So to prevent such tuples from being starved for selection we can add a small 
-constant e to every priority value.Another issue along similar lines is that greedily using these priority values may lead to a small subset of 
+constant e to every priority value. Another issue along similar lines is that greedily using these priority values may lead to a small subset of 
 experiences being replayed over and over resulting in a overfitting to that subset. To avoid this, we reintroduce some elements of uniform random sampling.
 This adds another hyper parameter A which we use to redefine the sampling probability as priority *PI* to the power *A* divided by the sum of all priorities *Pk*
 each raised to the power *a*.
@@ -225,43 +226,45 @@ these weights are more important towards the end of learning when your q values 
  <p></p>
 
 ## 5) Hyper Parameter tuning & Agent Comparison
-The final chapter is devided in two parts. Starting with the tuning of the hyper paramters of the greedy gradient declay and the buffer size change and finnishing 
-with the comparison of the above desrcibt agents. 
+The final chapter is divided in two parts. Starting with the tuning of the hyper parameters of the greedy gradient decay and the buffer size and finishing 
+with the comparison of the above describe agents. 
 
 ### 5.1) Hyperparameter 
-The two parameters are chosen, because they have a severe influence to the system.<br />
-The **Greddy gradient** represent the dilemma between Exploration and  Exploitation. Expoloration is the right thing to, maximize the expected 
-the expected reward on the one step, but exploration may produce the greater total reward in the long run[1].
-One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the nongreed actions and discover  which 
-of them are better than the greedy action. Reward is lowever in the short run, during  exploration, but higher in the long run.
-This could be done by a linearly decay *eps=1.0->0.1* with a stedy declay after every step with the equation below: 
+The two parameters are chosen, since they have a severe influence to the system.<br />
+The **Greedy gradient** represent the dilemma between exploration and  exploitation. *Exploration* is the right thing to, maximize the expected 
+the expected reward on the one step, but *exploration* may produce the greater total reward in the long run[1].
+One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the non-greed actions and discover  which 
+of them are better than the greedy action. Reward is lower in the short run, during  exploration, but higher in the long run.
+This could be done by a linearly decay *eps=1.0->0.1* with a steady decay after every step with the equation below. Where *eps_end* is ne minimal value and *eps_decay*
+is the rate for the degradation : 
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
 
-The **buffer size** influences the hardware store design and the computional learning time. That means that a bigger buffer
-needs longer to scan the saved expirencs and to pick one of them.<br />
+The **buffer size** influences the hardware store design and the computational learning time. That means that a bigger buffer
+needs longer to scan the saved experiences and to pick one of them. The other parameters are taken over from older projects where the neuronal net
+has been designed<br />
 
-#### 5.1.1 Epsilon (declay)
+#### 5.1.1 Epsilon (decay)
 So the expectation is to figure out a suitable degradation gradient that fits the project requirements. Therefore
-three values are tested, seen in image 5. Its seen that the  epsilon decay with 0.9975 takes the longes time to learn, that was also expected.
-Between eps 0.97 and 0.98 is the different much smaler eps=0.98 is performing slighly better. Because of this this value is chosen to continue 
-with the next experiements. 
+three values are tested, seen in image 5. It's seen that the  epsilon decay with 0.9975 takes the longes time to learn, that was also expected.
+Between the epsilon values 0.97 and 0.98 is just a small difference, however the 0.98 values has the best performance. Therefore its chosen to continue 
+with, for the next experiments. 
 
 #### 5.1.2 Buffer size
-Its expected that a bigger buffer, for the none *PER* algorithms perfromce better. Due to more importend and infrequent expierence that can be stored.
-Moreover its would probably have a soother saturation with less oscilazion. <br />
-Three buffer sizes are tested, each with a 10 magnitute difference, image 5. 
-The Result is that the size seems to have less influence than the greedy gradient. They runs have all more or less the same 
-same learning inclination. However the expection that the bigger buffer have less ossiclation with fullfiled.<br />
-For the next tests the Buffer size of 1e5 is chosen, since it has a good trad off between performance and computational time. 
+It's expected that a bigger buffer, performs better. Due to more important and infrequent experience that can be stored.
+Moreover it would probably have a smoother saturation with less oscillation. <br />
+Three buffer sizes are tested, starting with *1e4* and continuing in a 10x magnitude rise, image 5. 
+The Result is that the size seems to have less influence than the greedy gradient. The runs have more or less all the
+same learning inclination. However the exception that the bigger buffer have less oscillation with right.<br />
+For the next tests the Buffer size of 1e5 is chosen, since it has a good trade off between performance and computational time. 
 
 ### 5.2 Agent Comparison
-Actually an expected behavior would be that the PER-DQN Aaent performs best and then in decay order the Double-DQN and last the DQN algorithm.
-However the results looks different. Here the DQN is learning the fastest and the Double-DQN reaches in total the highes scores.
+Actually an expected behavior would be that the PER-DQN agent performs best and then in decay order the Double-DQN and the DQN algorithm.
+However the results looks different. The DQN algorithm is the faster learner and the Double-DQN agent reaches in total the highes scores.
 
-The question is why this is happen. One explanation could be that the environment is too easy so that the sophisticated algorithms cant play there hand.
+The question is what is the reason for this behavior. One explanation could be that the environment is too easy so that the sophisticated algorithm cant play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
-is hitting the best values.
+is hitting the best values. Which leads to a heavy divagation even for the same algorithm. 
 
 ### 5.3 Result Diagram
 
