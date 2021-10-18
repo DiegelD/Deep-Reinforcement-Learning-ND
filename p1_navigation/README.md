@@ -53,10 +53,7 @@ trying them. In the most interesting and challenging cases, actions may affect n
 These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
 
 The problem formalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
-Markov decision process.[1]
-
-![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
-
+Markov decision process. &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right)) &nbsp;[1] <br />
 At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;a_{t}\in&space;A) &nbsp; by following a police
 &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
 is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;P(s_{t&plus;1}|s_{t},a_{t})).
