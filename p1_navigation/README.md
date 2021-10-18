@@ -72,12 +72,11 @@ a deep Q-network, that can learn successful policies directly from high-dimensio
 
 So in this project an implementation that is close to this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
 However instead of using Convolutional layers, a less computational network of three neuronal layers is used. Hence the environment provides an observation space vector 
-of 37 dimensions that contains the agents velocity, along with ray-based perception of objects around the agents forward direction. This vector can be 
-as input for the net. As output four discrete values that are identical as the action space vector, are used.
+of 37 dimensions that contains the agents velocity, along with ray-based perception of objects around the agents forward direction. This vector is used
+as input for the net. As output, four discrete values that are identical as the action space vector, are used.
 
 Picture 2 illustrates the end to end learning of the neuronal net, with the dimensions of the net. The agent by it self trains the net with
 its actions. 
-
 
 <figure>
  <img src="./img/Net.png" width="500" alt="Net" />
@@ -282,21 +281,22 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
 [4]Deep Reinforcement Learning with Double Q-Learning [Link](https://arxiv.org/abs/1509.06461) <br />
 [5]Prioritized Experience Replay [Link](https://arxiv.org/abs/1511.05952) <br />
 
-### Introduction
+### Environment
+The environment is a modified version of the [**Food Collector**](https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Learning-Environment-Examples.md#banana-collector)
+from the Unity ML-Agents toolkit.
 
-For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
+The observation vector consist of a 5x7 matrix for the bananas position, related to the forward position of the agent. Additionally the agents velocity 
+in the plane (x,y) are included. In total this are then 37 dimension. 
 
-![Trained Agent][image1]
+The action space contains four discrete values:
 
-A reward of +1 is provided for collecting a yellow banana, and a reward of -1 is provided for collecting a blue banana.  Thus, the goal of your agent is to collect as many yellow bananas as possible while avoiding blue bananas.  
-
-The state space has 37 dimensions and contains the agent's velocity, along with ray-based perception of objects around agent's forward direction.  Given this information, the agent has to learn how to best select actions.  Four discrete actions are available, corresponding to:
 - **`0`** - move forward.
 - **`1`** - move backward.
 - **`2`** - turn left.
 - **`3`** - turn right.
 
-The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
+More information about the environment can be found [here](https://wpumacay.github.io/research_blog/posts/deeprlnd-project1-navigation/#1-description-of-the-banana-collector-environment), 
+however this information could not be verified, yet. 
 
 ### Getting Started
 
