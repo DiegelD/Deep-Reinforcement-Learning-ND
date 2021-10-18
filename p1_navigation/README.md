@@ -25,6 +25,7 @@ The second step is the extra mile, implementing additional algorithms/modificati
 </figure>
  <p></p>
 
+![Trained Agent][image1]
 
 Overview
 ---
@@ -256,9 +257,9 @@ For the next tests the Buffer size of 1e5 is chosen, since it has a good trade o
 
 ### 5.2 Agent Comparison
 Actually an expected behavior would be that the PER-DQN agent performs best and then in decay order the Double-DQN and the DQN algorithm.
-However the results looks different. The DQN algorithm is the fastest learner and the Double-DQN agent reaches in total the highes scores.
+However the results looks different. The DQN algorithm is the fastest learner and the Double-DQN agent reaches in total the highes score.
 
-What is the reason for this behavior: One explanation could be that the environment is too easy so that the sophisticated algorithm can't play there hand.
+What is the reason for this behavior: One explanation could be that the environment is too easy, so that the sophisticated algorithm can't play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
 is hitting the best values. Which leads to a heavy divagation even for the same algorithm. 
 
