@@ -4,6 +4,7 @@
 
 # Project 1: Navigation
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+![Trained Agent](./img/banana_collector_long.gif)
 
 ## Abstract
 In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
@@ -39,7 +40,6 @@ Overview
     5.3 Result Diagram <br />
 6. Appendix: *Environment  & Getting Started* ...
 
-![Trained Agent][image1]
 
 ## 1) Intro Reinforcement Learning
 The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
