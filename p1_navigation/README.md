@@ -6,8 +6,8 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ## Abstract
-In the following you will find the development of an **deep reinforcement learning Agent** that collects just yellow bananas and leaves bad (dark) ones.
-It's done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
+In the following you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
+The realisation is done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
 getting a reward/punishment for each collected banana. 
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
@@ -44,8 +44,8 @@ Overview
 The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
 has no explicit teacher, but it does have a direct sensorimotor connection to its environment. Exercising this connection produces a wealth of information about
 cause and effect, about the consequences of actions, and about what to do in order to achieve goals. Throughout our lives, such interaction are undoubtedly a major source of knowledge
-about our environment and ourself. Whether we are learning to drive a car to hold conversation, we are acutely aware of how our environment responds
-to what we do, and we seek to influence what happens through our behavior. Learning from interaction is a foundational idea underlaying nearly all theories of learning and
+about our environment and ourself. Whether we are learning to drive a car, to hold conversation, we are acutely aware of how our environment responds
+to what we do and we seek to influence what happens through our behavior. Learning from interaction is a foundational idea underlaying nearly all theories of learning and
 intelligence.[1]
 
 Reinforcement learning is learning what to do - how to map situation to action -- so as to maximize a numerical rewards signal. The learner is not told which actions to take, but instead must discover which actions yield the most rewards by
@@ -60,7 +60,7 @@ Markov decision process.[1]
 At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;a_{t}\in&space;A) &nbsp; by following a police
 &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
 is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
-Additional, a reward signal [equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
+Additional, a reward signal ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
 action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
 this process the agent interacts with the environment and obtains a behavior &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
