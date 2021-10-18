@@ -6,7 +6,7 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ## Abstract
-In the following you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
+In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
 Realised with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
 getting a reward/punishment for each collected banana. 
 
@@ -38,7 +38,7 @@ Overview
     &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
     5.2 Agent Comparison <br />
     5.3 Result Diagram <br />
-6. Appendix: *Build Instructions & Simulator* ...
+6. Appendix: *Environment  & Getting Started* ...
 
 ## 1) Intro Reinforcement Learning
 The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
@@ -242,8 +242,8 @@ has been designed<br />
 
 #### 5.1.1 Epsilon (decay)
 So the expectation is to figure out a suitable degradation gradient that fits the project requirements. Therefore
-three values are tested, seen in image 5. It's seen that the  epsilon decay with 0.9975 takes the longes time to learn, that was also expected.
-Between the epsilon values 0.97 and 0.98 is just a small difference, however the 0.98 values has the best performance. Therefore its chosen to continue 
+three values are tested, seen in image five. It's seen that the  epsilon decay with 0.9975 takes the longes time to learn, that is expected.
+Between the epsilon values 0.97 and 0.98 is just a small difference, however the 0.98 value has the best performance. Therefore its chosen to continue 
 with, for the next experiments. 
 
 #### 5.1.2 Buffer size
@@ -251,14 +251,14 @@ It's expected that a bigger buffer, performs better. Due to more important and i
 Moreover it would probably have a smoother saturation with less oscillation. <br />
 Three buffer sizes are tested, starting with *1e4* and continuing in a 10x magnitude rise, image 5. 
 The Result is that the size seems to have less influence than the greedy gradient. The runs have more or less all the
-same learning inclination. However the exception that the bigger buffer have less oscillation with right.<br />
+same learning inclination. Moreover the exception that the bigger buffer have less oscillation is right.<br />
 For the next tests the Buffer size of 1e5 is chosen, since it has a good trade off between performance and computational time. 
 
 ### 5.2 Agent Comparison
 Actually an expected behavior would be that the PER-DQN agent performs best and then in decay order the Double-DQN and the DQN algorithm.
-However the results looks different. The DQN algorithm is the faster learner and the Double-DQN agent reaches in total the highes scores.
+However the results looks different. The DQN algorithm is the fastest learner and the Double-DQN agent reaches in total the highes scores.
 
-The question is what is the reason for this behavior. One explanation could be that the environment is too easy so that the sophisticated algorithm cant play there hand.
+What is the reason for this behavior: One explanation could be that the environment is too easy so that the sophisticated algorithm can't play there hand.
 Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
 is hitting the best values. Which leads to a heavy divagation even for the same algorithm. 
 
@@ -281,7 +281,7 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
 [4]Deep Reinforcement Learning with Double Q-Learning [Link](https://arxiv.org/abs/1509.06461) <br />
 [5]Prioritized Experience Replay [Link](https://arxiv.org/abs/1511.05952) <br />
 
-### Environment
+### Environment 
 The environment is a modified version of the [**Food Collector**](https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Learning-Environment-Examples.md#banana-collector)
 from the Unity ML-Agents toolkit.
 
