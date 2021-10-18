@@ -25,8 +25,6 @@ The second step is the extra mile, implementing additional algorithms/modificati
 </figure>
  <p></p>
 
-![Trained Agent][image1]
-
 Overview
 ---
 1. Intro Reinforcement Learning
@@ -40,6 +38,8 @@ Overview
     5.2 Agent Comparison <br />
     5.3 Result Diagram <br />
 6. Appendix: *Environment  & Getting Started* ...
+
+![Trained Agent][image1]
 
 ## 1) Intro Reinforcement Learning
 The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
