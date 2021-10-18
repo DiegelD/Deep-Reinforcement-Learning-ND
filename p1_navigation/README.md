@@ -7,7 +7,7 @@
 
 ## Abstract
 In the following you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
-The realisation is done with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
+Realised with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
 getting a reward/punishment for each collected banana. 
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
@@ -57,15 +57,15 @@ Markov decision process.[1]
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right))
 
-At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;a_{t}\in&space;A) &nbsp; by following a police
-&nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
-is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;P(s_{t&plus;1}|s_{t},a_{t})).
-Additional, a reward signal ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})) is received to describe whether the underlying
-action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains a behavior &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{110}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
+At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;a_{t}\in&space;A) &nbsp; by following a police
+&nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
+is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;P(s_{t&plus;1}|s_{t},a_{t})).
+Additional, a reward signal ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;r(s_{t},a_{t})) is received to describe whether the underlying
+action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;r(s_{t},a_{t})). By repeating 
+this process the agent interacts with the environment and obtains a behavior &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
 at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
-![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
-where ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
+![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
+where ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
 future reward.[2]
 
 ## 2) Deep Reinforcement Learning (Deep Q-Networks)
