@@ -70,11 +70,10 @@ While reinforcement learning agents have achieved some success in a variety of d
 which useful features can be handcrafted. Here we used recent advances in training deep neural networks to develop a novel artificial agent, termed
 a deep Q-network, that can learn successful policies directly from high-dimensional sensory inputs using end to end reinforcement learning. [3]
 
-So in this project an implementation that is close to this [one](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
-However instead of using Convolutional layers, a less computational network of 3 neuronal layers is used. Hence the environment provides an observation space vector 
+So in this project an implementation that is close to this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
+However instead of using Convolutional layers, a less computational network of three neuronal layers is used. Hence the environment provides an observation space vector 
 of 37 dimensions that contains the agents velocity, along with ray-based perception of objects around the agents forward direction. This vector can be 
-as input for the net. The output of the net has four discrete values that are identical as the action space vector.
-More information about the environment can be found in the appendix.<br />
+as input for the net. As output four discrete values that are identical as the action space vector, are used.
 
 Picture 2 illustrates the end to end learning of the neuronal net, with the dimensions of the net. The agent by it self trains the net with
 its actions. 
@@ -94,7 +93,7 @@ its actions.
  ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
 
  wich is the maximum sum of rewards *rt* discounted by y at each time step *t*. Achievable by a behavior policy
- &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{110}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
+ &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{90}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
  and taking an action *(a)*. Reinforcement learning is kwon to be unstable or even to diverge when a nonlinear function approximator such as a 
  neuronal network is used to represent the action-value, also known as Q-function. This instability is corrected by using experience replay and 
  Q-fixed target.[3]
@@ -116,11 +115,11 @@ find the best possible value for the next state.
 </figure>
  <p></p>
 
-lets rewrite the target and expend the operation (fig. 3.2). Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
- and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
- mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
- our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
- since we always pick the maximum among a set of noisy numbers.
+Lets rewrite the target and expend the operation (fig. 3.2). Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
+and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
+mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
+our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
+since we always pick the maximum among a set of noisy numbers.
  
 <figure>
  <img src="./img/DoubleDQN_expanded.png" width="350" alt="DoubleDQN" />
@@ -156,7 +155,7 @@ Online reinforcement learning (RL) agents incrementally update their parameters 
 In their simplest from, they discard incoming data immediately, after a single update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochastic 
 gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be useful later on.[5]
 
-Let's recall the basic idea behind experience replay. The Agent interact with the environment to collect experience tuples <S,A,R....>, save
+Let's recall the basic idea behind experience replay. The Agent interact with the environment to collect experience tuples *<S,A,R....>*, save
 them in a buffer, and then later randomly sample a batch to learn from. This helps to break the correlation between consecutive experiences and
 stabilizes our learning algorithm.<br />
 Now Prioritized Experience Replay comes into play, some of these experiences may be more important for learning than others and may occur infrequently.
@@ -190,7 +189,7 @@ Zero or very low TD error doesn't necessarily mean we have nothing more to learn
 close due to the limited samples we visited till that point. So to prevent such tuples from being starved for selection we can add a small 
 constant e to every priority value. Another issue along similar lines is that greedily using these priority values may lead to a small subset of 
 experiences being replayed over and over resulting in a overfitting to that subset. To avoid this, we reintroduce some elements of uniform random sampling.
-This adds another hyper parameter A which we use to redefine the sampling probability as priority *PI* to the power *A* divided by the sum of all priorities *Pk*
+This adds another hyper parameter *a* which we use to redefine the sampling probability as priority *PI* to the power *a* divided by the sum of all priorities *Pk*
 each raised to the power *a*.
 
 <figure>
@@ -233,7 +232,7 @@ The **Greedy gradient** represent the dilemma between exploration and  exploitat
 the expected reward on the one step, but *exploration* may produce the greater total reward in the long run[1].
 One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the non-greed actions and discover  which 
 of them are better than the greedy action. Reward is lower in the short run, during  exploration, but higher in the long run.
-This could be done by a linearly decay *eps=1.0->0.1* with a steady decay after every step with the equation below. Where *eps_end* is ne minimal value and *eps_decay*
+This could be done by a linearly decay *eps=1.0->0.1* with a steady decay after every step with the equation below. Where *eps_end* is the minimal value and *eps_decay*
 is the rate for the degradation : 
 
 ![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
