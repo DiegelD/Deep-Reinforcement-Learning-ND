@@ -6,6 +6,7 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ![Trained Agent](./img/banana_collector_long.gif)
+*Above: trained agent in action!*
 
 ## Abstract
 In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
@@ -39,7 +40,8 @@ Overview
     &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
     5.2 Agent Comparison <br />
     5.3 Result Diagram <br />
-6. Appendix: *Environment  & Getting Started* ...
+6. Outlook
+7. Appendix: *Environment  & Getting Started* ...
 
 
 ## 1) Intro Reinforcement Learning
@@ -227,7 +229,7 @@ these weights are more important towards the end of learning when your q values 
 The final chapter is divided in two parts. Starting with the tuning of the hyper parameters of the greedy gradient decay and the buffer size and finishing 
 with the comparison of the above describe agents. 
 
-### 5.1) Hyperparameter 
+### 5.1 Hyperparameter 
 The two parameters are chosen, since they have a severe influence to the system.<br />
 The **Greedy gradient** represent the dilemma between exploration and  exploitation. *Exploration* is the right thing to, maximize the expected 
 the expected reward on the one step, but *exploration* may produce the greater total reward in the long run[1].
@@ -274,6 +276,13 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
  </figcaption>
 </figure>
  <p></p>
+
+## 6 Outlook
+For further improvements could be done in the following fields:
+1. **Deep Neuronal Network** change. Instead of three neuronal layers that are connected to the observation space vector using a *CNN*
+that is connected to the raw pixel display output. This would make the agent applicable to a wide field of games. Like in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
+2. **State of the art** implementing the *Rainbow* algorithm. That so for reaches the best performance for the DQN agents. Here you will find
+the *Rainbow* [paper](https://arxiv.org/abs/1710.02298).
 
 ## Appendix
 ### Citation
