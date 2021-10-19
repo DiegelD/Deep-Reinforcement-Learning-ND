@@ -7,7 +7,7 @@
 
 ![Trained Agent](./img/banana_collector_long.gif)
 </p> </p> 
-*Above: trained agent in action!*
+GIF: Trained agent in action.
 
 ## Abstract
 In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
@@ -280,9 +280,10 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
 
 ## 6 Outlook
 For further improvements could be done in the following fields:
-1. **Deep Neuronal Network** change. Instead of three neuronal layers that are connected to the observation space vector using a *CNN*
-that is connected to the raw pixel display output. This would make the agent applicable to a wide field of games. Like in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
-2. **State of the art** implementing the *Rainbow* algorithm. That so for reaches the best performance for the DQN agents. Here you will find
+1. **Deep Neuronal Network**. Instead of three neuronal layers that are connected to the observation space vector, a *CNN*
+that is connected to the raw pixel display could be used. This would make the agent applicable for a wide field of games. More information you
+can find in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
+2. **State of the art**. Implementing the *Rainbow* algorithm. That so fare reaches the best performance of the DQN agents. Here you will find
 the *Rainbow* [paper](https://arxiv.org/abs/1710.02298).
 
 ## Appendix
