@@ -35,7 +35,7 @@ Overview
 2. Deep Reinforcement Learning Q-learning
 3. Double Q-Learning
 4. Prioritized Experience Replay
-5. Hyper Parameter tuning & Agent Comparison <br />
+5. Hyper Parameter Tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
     &nbsp;&nbsp;&emsp; 5.1.1 Epsilon decay <br />
     &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
@@ -226,7 +226,7 @@ these weights are more important towards the end of learning when your q values 
 </figure>
  <p></p>
 
-## 5) Hyper Parameter tuning & Agent Comparison
+## 5) Hyper Parameter Tuning & Agent Comparison
 The final chapter is divided in two parts. Starting with the tuning of the hyper parameters of the greedy gradient decay and the buffer size and finishing 
 with the comparison of the above describe agents. 
 
