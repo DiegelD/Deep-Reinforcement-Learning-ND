@@ -6,6 +6,7 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ![Trained Agent](./img/banana_collector_long.gif)
+</p> </p> 
 *Above: trained agent in action!*
 
 ## Abstract
