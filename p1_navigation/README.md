@@ -230,6 +230,8 @@ these weights are more important towards the end of learning when your q values 
 The final chapter is divided in two parts. Starting with the tuning of the hyper parameters of the greedy gradient decay and the buffer size and finishing 
 with the comparison of the above describe agents. 
 
+All the final *parameter*,*architecture* details and results of the different algorithms you can find in the [*Report.md*](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/blob/main/p1_navigation/Report.md). 
+
 ### 5.1 Hyperparameter 
 The two parameters are chosen, since they have a severe influence to the system.<br />
 The **Greedy gradient** represent the dilemma between exploration and  exploitation. *Exploration* is the right thing to, maximize the expected 
@@ -278,7 +280,7 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
 </figure>
  <p></p>
 
-## 6 Outlook
+## 6) Future Work
 For further improvements could be done in the following fields:
 1. **Deep Neuronal Network**. Instead of three neuronal layers that are connected to the observation space vector, a *CNN*
 that is connected to the raw pixel display could be used. This would make the agent applicable for a wide field of games. More information you
