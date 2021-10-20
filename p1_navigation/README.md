@@ -41,7 +41,7 @@ Overview
     &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
     5.2 Agent Comparison <br />
     5.3 Result Diagram <br />
-6. Outlook
+6. Future Work
 7. Appendix: *Environment  & Getting Started* ...
 
 
