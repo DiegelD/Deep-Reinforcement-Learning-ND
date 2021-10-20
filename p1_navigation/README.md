@@ -281,7 +281,7 @@ is hitting the best values. Which leads to a heavy divagation even for the same 
  <p></p>
 
 ## 6) Future Work
-For further improvements could be done in the following fields:
+Further improvements could be done in the following fields:
 1. **Deep Neuronal Network**. Instead of three neuronal layers that are connected to the observation space vector, a *CNN*
 that is connected to the raw pixel display could be used. This would make the agent applicable for a wide field of games. More information you
 can find in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
