@@ -45,8 +45,56 @@ For training:
 
 ## 2) Algorithm Results
 ### DQN
+```
+Episode 100	Average Score: 3.92
+Episode 200	Average Score: 8.67
+Episode 300	Average Score: 12.29
+Episode 329	Average Score: 13.02
+Environment solved in 229 episodes!	Average Score: 13.02
+```
+<figure>
+ <img src="./img/scores_dqn.png" width="200" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 2.1: DQN Results.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
 ### Double DQN
+```
+Episode 100	Average Score: 0.51
+Episode 200	Average Score: 4.19
+Episode 300	Average Score: 7.63
+Episode 400	Average Score: 11.28
+Episode 468	Average Score: 13.01
+Environment solved in 368 episodes!	Average Score: 13.01
+```
+<figure>
+ <img src="./img/scores_double_dqn.png" width="200" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 2.2: Double DQN Results.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
 ### PER DQN
+```
+Episode 100	Average Score: 2.73
+Episode 200	Average Score: 5.18
+Episode 300	Average Score: 9.66
+Episode 377	Average Score: 13.02
+Environment solved in 277 episodes!	Average Score: 13.02
+```
+<figure>
+ <img src="./img/scores_per_dqn.png" width="200" alt="PerDQN" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 2.3: PER DQN Results.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
 
 
 
