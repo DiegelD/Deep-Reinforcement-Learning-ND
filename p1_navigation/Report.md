@@ -5,15 +5,7 @@
 # Project 1: Navigation
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-![Trained Agent](./img/banana_collector_long.gif)
-</p> </p> 
-GIF: Trained agent in action.
-
 ## Abstract
-In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
-Realised with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
-getting a reward/punishment for each collected banana. 
-
 In the following you will find the parameters for algorithms and results.
 
 Overview
@@ -96,5 +88,11 @@ Environment solved in 277 episodes!	Average Score: 13.02
 </figure>
  <p></p>
 
-
+## 3) Future Work
+For further improvements could be done in the following fields:
+1. **Deep Neuronal Network**. Instead of three neuronal layers that are connected to the observation space vector, a *CNN*
+that is connected to the raw pixel display could be used. This would make the agent applicable for a wide field of games. More information you
+can find in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
+2. **State of the art**. Implementing the *Rainbow* algorithm. That so fare reaches the best performance of the DQN agents. Here you will find
+the *Rainbow* [paper](https://arxiv.org/abs/1710.02298).
 
