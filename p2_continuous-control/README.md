@@ -35,8 +35,6 @@ Overview
 ---
 1. Policty Gradien Methods
 2. DDPG
-3. Double Q-Learning
-4. Prioritized Experience Replay
 5. Hyper Parameter Tuning & Agent Comparison <br />
     5.1 Hyperparameter <br />
     &nbsp;&nbsp;&emsp; 5.1.1 Epsilon decay <br />
@@ -54,12 +52,14 @@ In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND
 Methods that lean approximation to both policy and value fucntions are often called actor-critic, where 'actor' is referenc to the learned policy and 'critic' refers to the learnd value function.[3]
 Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)[3]
 
-Moreover while value functions mails DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQN cannot be straight-forwardly applied to continous domains since it relies on finding
+Moreover while value functions like DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQN cannot be straight-forwardly applied to continous domains since it relies on finding
 the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of action. Inead of computing learned probabilities for each of the many action, we instead learn statistics of the probability destribution. [3]
 
 ### Actor-Critic Methods
 Actor-critic algorithms lean both policies and value functions. The 'actor' is the component that leans policies and the 'critic' is the component that leans about whatever policy is currently  being followed by the actor on order to 'criticize' the actors action choises.<br />
 The critic uses TD algorithm to lean the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sendinf TD errors to the actor. Bases on these critiwues th acotr contonually updates its policy. 
+
+This is used to combine both worlds. The actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
 
 <figure>
  <img src="./img/ActorCritic_Modell.png" width="500" alt="" />
@@ -77,7 +77,7 @@ The critic introduces bias into the actors gradient estimaes, but often desibale
 The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action. 
 
 <figure>
- <img src="./img/DQN_DDPG_valuefunction.png" width="360" alt="" />
+ <img src="./img/DQN_DDPG_valuefunction.png" width="500" alt="whatever" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 2: Value Function Objectivs [2].  </p> 
