@@ -89,8 +89,7 @@ The training process from DQN to DDPG is quiet similar, the agent collects exper
 
 Learning a deterministic policy, we want to train a network that can give us the optimal action in a given state. That means the agent tries to find the action that maximizes this value. The objectiv is simple, we can use the expected Q-value from the Critic to maximaze the action policy. 
 <figure>
- <img src="./img/DDPG_deterministic_policy.png" width="360" alt="" />
- <figcaption>
+ <img src="./img/DDPG_deterministic_policy.png" width="500" alt="whatever" />
  <p></p> 
  <p style="text-align: center;"> Fig. 3: DDPG deterministic policy [2].  </p> 
  </figcaption>
