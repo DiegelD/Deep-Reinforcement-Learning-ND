@@ -62,7 +62,7 @@ Actor-critic algorithms lean both policies and value functions. The 'actor' is t
 The critic uses TD algorithm to lean the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sendinf TD errors to the actor. Bases on these critiwues th acotr contonually updates its policy. 
 
 <figure>
- <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
+ <img src="./img/ActorCritic_Modell.png" width="500" alt="" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts stae-value parameters using  the same error. It produces a error from the rewards isgnal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
