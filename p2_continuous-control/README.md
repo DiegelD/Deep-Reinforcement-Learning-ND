@@ -23,7 +23,7 @@ second tuning the hyper parameters so that the agent collectings enough rewards 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
 <figure>
- <img src="./img/DRL_landscape_actor_critic.png" width="500" alt="BehaviourControl" />
+ <img src="./img/DRL_landscape_actor_critic.png" width="750" alt="BehaviourControl" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 1: Schematic allocation in the reinforcement landscape.  </p> 
