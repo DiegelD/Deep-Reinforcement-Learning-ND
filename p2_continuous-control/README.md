@@ -12,13 +12,12 @@
 GIF: Trained agent in action.
 
 ### Abstract
-In this project you will find the development of an **Actor Critic reinforcement learning Agent**(figure 1) implicita an **Deep Deterministic Policiy Gradietn Agent** (DDPG)[1] that solvs an double-jointed roboter arm to follow a certain trajectory in an 
-**Continous Space Environement**. Simplyfied DDPG is descibed as an DQN-Methode for contious space since it uses many of the same techniques found in DQN: 
-- Replaybuffer to train an action-value function in an off-policy manner <br />
+In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent**(figure 1) implicit an **Deep Deterministic Policiy Gradietn Agent** (DDPG) using deep function approximators[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
+**Continous Space Environement**. Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
+- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations btween sampels<br />
 - Target Networks to stabilize training <br />
-However DDPG trains a policy that approximates the optimal action. Therefore its a determenistic policy-gradient method restriced to contious space.[2] 
  
-The development of the agent is a two step process. First implementeing the the given agent from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) to this project and
+The development of the agent is a two step process. First implementeing the the given agent from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
 second tuning the hyper parameters so that the agent collectings enough rewards to solve this problem. 
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
@@ -34,8 +33,8 @@ second tuning the hyper parameters so that the agent collectings enough rewards 
 
 Overview
 ---
-1. Intro Reinforcement Learning
-2. Deep Reinforcement Learning Q-learning
+1. Policty Gradien Methods
+2. DDPG
 3. Double Q-Learning
 4. Prioritized Experience Replay
 5. Hyper Parameter Tuning & Agent Comparison <br />
@@ -47,16 +46,16 @@ Overview
 6. Future Work
 7. Appendix: *Environment  & Getting Started* ...
 
+However DDPG trains a policy that approximates the optimal action. Therefore its a determenistic policy-gradient method restriced to contious space.[2] 
 
-## 1) Intro DDPG
+## 1) Policty Gradien Methods
 
-### Policty Gradien Methods
-In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) a brief introduction to Reinforcment Learning and to the value base function DQN is given. Policy Gradient Methods instead learn a parameterized policy that can selcet actions without consulting a vaulue function. A value function may still be use to learn the policy parameters.
+In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) a brief introduction to Reinforcment Learning and to the value base function DQN is given. On the other hand there are also Policy Gradient Methods, that instead learn a parameterized policy that can selcet actions without consulting a vaulue function. A value function may still be use to learn the policy parameters.
 Methods that lean approximation to both policy and value fucntions are often called actor-critic, where 'actor' is referenc to the learned policy and 'critic' refers to the learnd value function.[3]
-Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)
+Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)[3]
 
-
-Policy-based methods also useful ways of dealing with continous action spaces, as we decibe late. Policy-based methods offer practival ways of dealing with large action spaces, even continous spaces with an inifinite number of action. Inead of compuing learned probabilities for each of the many action, we instead learn statistics of the probability destribution. 
+Moreover while value functions mails DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQN cannot be straight-forwardly applied to continous domains since it relies on finding
+the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of action. Inead of computing learned probabilities for each of the many action, we instead learn statistics of the probability destribution. [3]
 
 ### Actor-Critic Methods
 Actor-critic algorithms lean both policies and value functions. The 'actor' is the component that leans policies and the 'critic' is the component that leans about whatever policy is currently  being followed by the actor on order to 'criticize' the actors action choises.<br />
@@ -74,7 +73,7 @@ The critic uses TD algorithm to lean the state-value function for the actors cur
 In this methods the state-value function is applied also to the second state of transistion. From the TD learning of value functions throughout this book, the one-step return is often superior to the actual return in terms of its variance and computational congeniality.
 The critic introduces bias into the actors gradient estimaes, but often desibale for the same reason that bootstrapping TD methods are often superiour to Monte Carlo methos (substantially reduced variande)
 
-
+## 2) DDPG
 The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action. 
 
 <figure>
@@ -180,4 +179,4 @@ Then, place the file in the `p2_continuous-control/` folder in the DRLND GitHub 
 [1]Deep Deterministic Policy Gradient [Link](https://arxiv.org/pdf/1509.02971.pdf) <br />
 [2]Deep Reinforcement Learning, *Miguel Morales* <br />
 [3]Reinforcement Learning, Sutton & Barton <br />
-[4]Contiuous Control with Deep Reinformcment Learning([DDPG])(https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
+[4]Contiuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
