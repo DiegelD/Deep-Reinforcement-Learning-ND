@@ -23,7 +23,7 @@ second tuning the hyper parameters so that the agent collectings enough rewards 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
 <figure>
- <img src="./img/DRL_landscape_actor_critic.png" width="360" alt="BehaviourControl" />
+ <img src="./img/DRL_landscape_actor_critic.png" width="500" alt="BehaviourControl" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 1: Schematic allocation in the reinforcement landscape.  </p> 
@@ -62,7 +62,7 @@ The critic uses TD algorithm to lean the state-value function for the actors cur
 This is used to combine both worlds. The actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
 
 <figure>
- <img src="./img/ActorCritic_Modell.png" width="500" alt="" />
+ <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts stae-value parameters using  the same error. It produces a error from the rewards isgnal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
