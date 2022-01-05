@@ -79,7 +79,7 @@ Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applie
 The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action. 
 
 <figure>
- <img src="./img/DQN_DDPG_valuefunction.png" width="500" alt="whatever" />
+ <img src="./img/DQN_DDPG_valuefunction.png" width="750" alt="whatever" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 2: Value Function Objectivs [2].  </p> 
@@ -89,7 +89,7 @@ The training process from DQN to DDPG is quiet similar, the agent collects exper
 
 Learning a deterministic policy, we want to train a network that can give us the optimal action in a given state. That means the agent tries to find the action that maximizes this value. The objectiv is simple, we can use the expected Q-value from the Critic to maximaze the action policy. 
 <figure>
- <img src="./img/DDPG_deterministic_policy.png" width="500" alt="whatever" />
+ <img src="./img/DDPG_deterministic_policy.png" width="750" alt="whatever" />
  <p></p> 
  <p style="text-align: center;"> Fig. 3: DDPG deterministic policy [2].  </p> 
  </figcaption>
