@@ -13,10 +13,8 @@ GIF: Trained agent in action.
 
 ### Abstract
 In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent**(figure 1) implicit an **Deep Deterministic Policiy Gradietn Agent** (DDPG) using deep function approximators[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
-**Continous Space Environement**. Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
-- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations btween sampels<br />
-- Target Networks to stabilize training <br />
- 
+**Continous Space Environement**. 
+
 The development of the agent is a two step process. First implementeing the the given agent from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
 second tuning the hyper parameters so that the agent collectings enough rewards to solve this problem. 
 
@@ -74,6 +72,10 @@ In this methods the state-value function is applied also to the second state of 
 The critic introduces bias into the actors gradient estimaes, but often desibale for the same reason that bootstrapping TD methods are often superiour to Monte Carlo methos (substantially reduced variande)
 
 ## 2) DDPG
+Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
+- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations btween sampels<br />
+- Target Networks to stabilize training <br />
+
 The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action. 
 
 <figure>
