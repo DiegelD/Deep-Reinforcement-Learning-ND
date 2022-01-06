@@ -64,7 +64,7 @@ So two worlds can be combined, the actor has a high variance but low bias on the
  <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts state-value parameters using  the same error. It produces a error from the rewards signal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
+ <p style="text-align: center;"> Fig. 2.1: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts state-value parameters using  the same error. It produces a error from the rewards signal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
  </figcaption>
 </figure>
  <p></p>
@@ -83,7 +83,7 @@ The training process from DQN to DDPG is quiet similar, the agent collects exper
  <img src="./img/DQN_DDPG_valuefunction.png" width="750" alt="whatever" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2: Value Function Objectivs [2].  </p> 
+ <p style="text-align: center;"> Fig. 3.1: Value Function Objectivs [2].  </p> 
  </figcaption>
 </figure>
  <p></p>
@@ -92,7 +92,7 @@ Learning a deterministic policy, we want to train a network that can give us the
 <figure>
  <img src="./img/DDPG_deterministic_policy.png" width="750" alt="whatever" />
  <p></p> 
- <p style="text-align: center;"> Fig. 3: DDPG deterministic policy [2].  </p> 
+ <p style="text-align: center;"> Fig. 3.2: DDPG deterministic policy [2].  </p> 
  </figcaption>
 </figure>
  <p></p>
@@ -137,7 +137,7 @@ Finally a weight decay L2 is introduced and compared how the impact will be.
 <figure>
  <img src="./img/Conclusion.png" width="750" alt="whatever" />
  <p></p> 
- <p style="text-align: center;"> Fig. 3: Results of the experiments.  </p> 
+ <p style="text-align: center;"> Fig. 4.1: Results of the experiments.  </p> 
  </figcaption>
 </figure>
  <p></p>
