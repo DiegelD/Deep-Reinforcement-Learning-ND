@@ -13,10 +13,11 @@ GIF: Trained agent in action.
 
 ### Abstract
 In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent**(figure 1) implicit an **Deep Deterministic Policiy Gradietn Agent** (DDPG) using deep function approximators[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
-**Continous Space Environement**. 
+**Continous Space Environement**. To increase the learning speed of the algroithm an 20 agend spaced envirnoment is used. Where every agend adds its expiereance to a replaybuffer which is shared by all agents and the network (critic & actor) are there for updated the equivalent amoutn of times. 
 
-The development of the agent is a two step process. First implementeing the the given agent from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
-second tuning the hyper parameters so that the agent collectings enough rewards to solve this problem. 
+The development of the agent is a two step process:
+*First implementeing the the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
+*second tuning the hyper parameters* so that the agent collectings enough rewards to solve this problem. 
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
@@ -96,7 +97,7 @@ Learning a deterministic policy, we want to train a network that can give us the
 </figure>
  <p></p>
 
-Exploration with deterministic policies:
+**Exploration with deterministic policies:**
 Since the DDPG agent learns a deterministic policy, it wont explore on-ploicy.To deal with this issue noise is injected into the action selected by the policy. This means in DDPG the agent explores by adding external noise to actions, using off policy explorations stragtegies. 
 
 
