@@ -12,11 +12,11 @@
 GIF: Trained agent in action.
 
 ### Abstract
-In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent**(figure 1) implicit an **Deep Deterministic Policiy Gradietn Agent** (DDPG) using deep function approximators[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
+In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent** (figure 1) using deep function approximators, a so called **Deep Deterministic Policiy Gradietn Agent** (DDPG)[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
 **Continous Space Environement**. To increase the learning speed of the algroithm an 20 agend spaced envirnoment is used. Where every agend adds its expiereance to a replaybuffer which is shared by all agents and the network (critic & actor) are there for updated the equivalent amoutn of times. 
 
 The development of the agent is a two step process:
-*1) implementeing the the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
+*1) Implementeing the the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
 *2) tuning the hyper parameters* so that the agent collectings enough rewards to solve this problem. 
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
@@ -47,18 +47,17 @@ However DDPG trains a policy that approximates the optimal action. Therefore its
 
 ## 1) Policty Gradien Methods
 
-In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) a brief introduction to Reinforcment Learning and to the value base function DQN is given. On the other hand there are also Policy Gradient Methods, that instead learn a parameterized policy that can selcet actions without consulting a vaulue function. A value function may still be use to learn the policy parameters.
-Methods that lean approximation to both policy and value fucntions are often called actor-critic, where 'actor' is referenc to the learned policy and 'critic' refers to the learnd value function.[3]
-Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)[3]
+In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) a brief introduction to Reinforcment Learning and to the value base functions DQNs is given. Also a big role in the Reinforcment Learning are Policy Gradient Methods playing, that learn a parameterized policy and selcet actions without consulting a vaulue function. A value function may still be used to learn the policy parameters.
+Like actor-critic methods that learn approximation to both policy and value fucntions, where 'actor' is referenc to the learned policy and 'critic' refers to the learnd value function.
+Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be a simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)[3]
 
-Moreover while value functions like DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQN cannot be straight-forwardly applied to continous domains since it relies on finding
-the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of action. Inead of computing learned probabilities for each of the many action, we instead learn statistics of the probability destribution. [3]
+While value functions like DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQNs cannot be straight-forwardly applied to continous domains since they rely on finding
+the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of actions. Instead of computing learned probabilities for each of the many action, they instead learn statistics of the probability destribution. [3]
 
 ### Actor-Critic Methods
-Actor-critic algorithms lean both policies and value functions. The 'actor' is the component that leans policies and the 'critic' is the component that leans about whatever policy is currently  being followed by the actor on order to 'criticize' the actors action choises.<br />
-The critic uses TD algorithm to lean the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sendinf TD errors to the actor. Bases on these critiwues th acotr contonually updates its policy. 
-
-This is used to combine both worlds. The actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
+Actor-critic algorithms learn both policies and value functions. The 'actor' is the component that learns policies and the 'critic' is the component that learns about whatever policy is currently being followed by the actor on order to 'criticize' the actors action choises.<br />
+The critic use a Temporal Difference (TD) algorithm to learn the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sending TD errors to the actor. Bases on these critiques th actor continuity updates its policy. 
+So two worlds can be combined, the actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
 
 <figure>
  <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
