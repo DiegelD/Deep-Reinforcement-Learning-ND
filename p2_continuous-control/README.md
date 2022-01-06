@@ -33,15 +33,16 @@ The development of the agent is a two step process:
 Overview
 ---
 1. Policty Gradien Methods
-2. DDPG
-5. Hyper Parameter Tuning & Agent Comparison <br />
-    5.1 Hyperparameter <br />
-    &nbsp;&nbsp;&emsp; 5.1.1 Epsilon decay <br />
-    &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
-    5.2 Agent Comparison <br />
-    5.3 Result Diagram <br />
-6. Future Work
-7. Appendix: *Environment  & Getting Started* ...
+2. Actor-Critic Methods
+3. DDPG
+4. Model Comparison & Hyper Parameter Tuning<br />
+    4.1 Model Comparison <br />
+    4.1 Hyperparameter <br />
+    &nbsp;&nbsp;&emsp; 4.1.1 Batchsize <br />
+    &nbsp;&nbsp;&emsp; 4.1.2 Weight decay <br />
+    4.3 Result Diagram & Final Model and Hyper Parameters <br />
+5. Future Work
+6. Appendix: *Environment  & Getting Started* ...
 
 However DDPG trains a policy that approximates the optimal action. Therefore its a determenistic policy-gradient method restriced to contious space.[2] 
 
@@ -54,7 +55,7 @@ Perhabs the simplest advantage that policy parameterization may have over action
 While value functions like DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQNs cannot be straight-forwardly applied to continous domains since they rely on finding
 the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of actions. Instead of computing learned probabilities for each of the many action, they instead learn statistics of the probability destribution. [3]
 
-### Actor-Critic Methods
+## 2) Actor-Critic Methods
 Actor-critic algorithms learn both policies and value functions. The 'actor' is the component that learns policies and the 'critic' is the component that learns about whatever policy is currently being followed by the actor on order to 'criticize' the actors action choises.<br />
 The critic use a Temporal Difference (TD) algorithm to learn the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sending TD errors to the actor. Bases on these critiques th actor continuity updates its policy. 
 So two worlds can be combined, the actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
@@ -63,7 +64,7 @@ So two worlds can be combined, the actor has a high variance but low bias on the
  <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts stae-value parameters using  the same error. It produces a error from the rewards isgnal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
+ <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts state-value parameters using  the same error. It produces a error from the rewards signal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
  </figcaption>
 </figure>
  <p></p>
@@ -71,12 +72,12 @@ So two worlds can be combined, the actor has a high variance but low bias on the
 In this methods the state-value function is applied also to the second state of transistion. From the TD learning of value functions throughout this book, the one-step return is often superior to the actual return in terms of its variance and computational congeniality.
 The critic introduces bias into the actors gradient estimaes, but often desibale for the same reason that bootstrapping TD methods are often superiour to Monte Carlo methos (substantially reduced variande)
 
-## 2) DDPG
+## 3) DDPG
 Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
-- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations btween sampels<br />
+- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations between sampels<br />
 - Target Networks to stabilize training <br />
 
-The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action. 
+The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action.[2] 
 
 <figure>
  <img src="./img/DQN_DDPG_valuefunction.png" width="750" alt="whatever" />
@@ -99,8 +100,38 @@ Learning a deterministic policy, we want to train a network that can give us the
 **Exploration with deterministic policies:**
 Since the DDPG agent learns a deterministic policy, it wont explore on-ploicy.To deal with this issue noise is injected into the action selected by the policy. This means in DDPG the agent explores by adding external noise to actions, using off policy explorations stragtegies. 
 
+## 4) Model Comparison & Hyper Parameter Tuning<
+The final chapter is divided in two parts. Starting in search of neuronal model arichtecutres and finishing with tuning of the hyper parameters of the weight declay and batchsize.
 
+All the final parameter,architecture details and results you can find in the Report.md.
 
+### 4.1 Model Comparison
+To finde the most suiting neuronal arichtecture three models are going to be comphared.
+1. The orginal model from Udacity with an architecture
+    - actor one fully connected layer 256
+    - critic three fully connected layers size 256 256 128
+2. Introduction of the actor net from the orginal DDPG paper[1] and staying with the critic net from former projects
+    - actor two fully connected layers size  400 300
+    - critic three fully connected layers size 256 256 128
+3. Going all in the net size from the orginal DDPG paper[1]
+    - actor two fully connected layers size  400 300
+    - critic two fully connected layers size 200 200
+
+Its seen that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
+
+### 4.2 Batchsize tuning
+So the second model from 4.1 is taken and runs with different batchsizes. 
+1. 128
+2. 256
+3. 64, thats the batch size they used in the DDPG paper[1]
+
+Briefly spoken, the batch size of 256 perfromes best in the manner that it reaches fastest the goal score.
+
+### 4.3 Weight Declay
+Finally a weight decay L2 is introduced and compared how the impact will be. 
+1. No weight declay 
+2. WEIGHT_DECAY = 0.0001 like in the former project
+3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
 
 ## From Udacity
 
