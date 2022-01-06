@@ -129,10 +129,16 @@ So the second model from 4.1 is taken and runs with different batchsizes.
 Briefly spoken, the batch size of 256 perfromes best in the manner that it reaches fastest the goal score.
 
 #### 4.2.2 Weight Declay
-Finally a weight decay L2 is introduced and compared how the impact will be. 
+Finally a weight decay L2 is tested. 
 1. No weight declay 
 2. WEIGHT_DECAY = 0.0001 like in the former project
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
+
+However both tests with weight decay faild. Resons could be the special environement where we have 20 agents but do not use all and every update of them. -> Have a look in the code in the file agent.step().
+
+### Result Diagram & Final Model and Hyper Parameters 
+As a result the DDPG algorithm with an actor size of 400-300, a critic size of 256-256-128 and a batchsize of 256 shows the best performance. 
+All the other parameters can be found here Report.md.
 
 <figure>
  <img src="./img/Conclusion.png" width="750" alt="whatever" />
