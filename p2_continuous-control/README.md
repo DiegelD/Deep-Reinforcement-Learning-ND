@@ -117,9 +117,12 @@ To finde the most suiting neuronal arichtecture three models are going to be com
     - actor two fully connected layers size  400 300
     - critic two fully connected layers size 200 200
 
-Its seen that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
+Its shown that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
 
 ### 4.2 Hyper Parameter
+The two parameter of batch-size and Weight Decay are been chosen. Since batch-size have a strong impact of the stability and dynamic of the net. Smaller batch sizes in general are more noisy, offering a regularizing effect and lower generalization error[4]. Other imported parameters like the learning rate is taken over from the DDPG paper [1].
+The L2 Weight Decay is simply chosen since i did not had any problems with overfitting durch the previous test. However since the DDPG paper and some examples from Udacity used this parameter i also tested it. L2 Weight Decay prevent a net from overfitting by restricting the weights of the network from getting to big[5].
+
 #### 4.2.1 Batchsize
 So the second model from 4.1 is taken and runs with different batchsizes. 
 1. 128
@@ -129,7 +132,7 @@ So the second model from 4.1 is taken and runs with different batchsizes.
 Briefly spoken, the batch size of 256 perfromes best in the manner that it reaches fastest the goal score.
 
 #### 4.2.2 Weight Declay
-Finally a weight decay L2 is tested. 
+Finally a L2 weight decay is tested. 
 1. No weight declay 
 2. WEIGHT_DECAY = 0.0001 like in the former project
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
@@ -230,7 +233,8 @@ Then, place the file in the `p2_continuous-control/` folder in the DRLND GitHub 
 (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
 ## Appendix
 ### Citation
-[1]Deep Deterministic Policy Gradient [Link](https://arxiv.org/pdf/1509.02971.pdf) <br />
+[1]Contiuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
 [2]Deep Reinforcement Learning, *Miguel Morales* <br />
 [3]Reinforcement Learning, Sutton & Barton <br />
-[4]Contiuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
+[4]Blog [Post](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/) Batch Size, 06.01.22 <br />
+[5]Blog Weigh Decay and L2 [Post](https://jamesmccaffrey.wordpress.com/2019/05/09/the-difference-between-neural-network-l2-regularization-and-weight-decay/),06.01.22 <br />
