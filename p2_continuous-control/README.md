@@ -100,7 +100,7 @@ Learning a deterministic policy, we want to train a network that can give us the
 **Exploration with deterministic policies:**
 Since the DDPG agent learns a deterministic policy, it wont explore on-ploicy.To deal with this issue noise is injected into the action selected by the policy. This means in DDPG the agent explores by adding external noise to actions, using off policy explorations stragtegies. 
 
-## 4) Model Comparison & Hyper Parameter Tuning<
+## 4) Model Comparison & Hyper Parameter Tuning -> Write Report.md
 The final chapter is divided in two parts. Starting in search of neuronal model arichtecutres and finishing with tuning of the hyper parameters of the weight declay and batchsize.
 
 All the final parameter,architecture details and results you can find in the Report.md.
@@ -119,7 +119,7 @@ To finde the most suiting neuronal arichtecture three models are going to be com
 
 Its seen that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
 
-### 4.2 Hyper parameter
+### 4.2 Hyper Parameter
 #### 4.2.1 Batchsize
 So the second model from 4.1 is taken and runs with different batchsizes. 
 1. 128
@@ -133,6 +133,16 @@ Finally a weight decay L2 is introduced and compared how the impact will be.
 1. No weight declay 
 2. WEIGHT_DECAY = 0.0001 like in the former project
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
+
+<figure>
+ <img src="./img/Conclusion.png.png" width="750" alt="whatever" />
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3: Results of the experiments.  </p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+
 
  ## 5) Future Work
 Further improvements could be done in the following fields:
