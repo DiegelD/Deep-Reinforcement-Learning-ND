@@ -135,7 +135,7 @@ Finally a weight decay L2 is introduced and compared how the impact will be.
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
 
 <figure>
- <img src="./img/Conclusion.png.png" width="750" alt="whatever" />
+ <img src="./img/Conclusion.png" width="750" alt="whatever" />
  <p></p> 
  <p style="text-align: center;"> Fig. 3: Results of the experiments.  </p> 
  </figcaption>
