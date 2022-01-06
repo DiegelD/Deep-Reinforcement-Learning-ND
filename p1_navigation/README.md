@@ -1,27 +1,28 @@
 [//]: # (Image References)
 
-[image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
+[image1]: https://user-images.githubusercontent.com/10624937/43851024-320ba930-9aff-11e8-8493-ee547c6af349.gif "Trained Agent"
+[image2]: https://user-images.githubusercontent.com/10624937/43851646-d899bf20-9b00-11e8-858c-29b5c2c94ccc.png "Crawler"
 
-# Project 1: Navigation
+
+# Project 2: Continuous Control ---> Readme under construction!!!
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-![Trained Agent](./img/banana_collector_long.gif)
+![Trained Agent][image1]
 </p> </p> 
 GIF: Trained agent in action.
 
-## Abstract
-In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
-Realised with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
-getting a reward/punishment for each collected banana. 
+### Abstract
+In this project you will find the development of an modell-free, off-policy **Actor Critic reinforcement learning Agent** (figure 1) using deep function approximators, a so called **Deep Deterministic Policiy Gradietn Agent** (DDPG)[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
+**Continous Space Environement**. To increase the learning speed of the algroithm an 20 agend spaced envirnoment is used. Where every agend adds its expiereance to a replaybuffer which is shared by all agents and the network (critic & actor) are there for updated the equivalent amoutn of times. 
 
-The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
-tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and full-filling with it the project requirements.
-The second step is the extra mile, implementing additional algorithms/modifications and comparing them against the origin DQN agent.
+The development of the agent is a two step process:
+*1) Implementeing the the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
+*2) tuning the hyper parameters* so that the agent collectings enough rewards to solve this problem. 
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
 
 <figure>
- <img src="./img/DRL_landscape.png" width="360" alt="BehaviourControl" />
+ <img src="./img/DRL_landscape_actor_critic.png" width="750" alt="BehaviourControl" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 1: Schematic allocation in the reinforcement landscape.  </p> 
@@ -31,298 +32,189 @@ The second step is the extra mile, implementing additional algorithms/modificati
 
 Overview
 ---
-1. Intro Reinforcement Learning
-2. Deep Reinforcement Learning Q-learning
-3. Double Q-Learning
-4. Prioritized Experience Replay
-5. Hyper Parameter Tuning & Agent Comparison <br />
-    5.1 Hyperparameter <br />
-    &nbsp;&nbsp;&emsp; 5.1.1 Epsilon decay <br />
-    &nbsp;&nbsp;&emsp; 5.1.2 Buffersize <br />
-    5.2 Agent Comparison <br />
-    5.3 Result Diagram <br />
-6. Future Work
-7. Appendix: *Environment  & Getting Started* ...
+1. Policty Gradien Methods
+2. Actor-Critic Methods
+3. DDPG
+4. Model Comparison & Hyper Parameter Tuning <br />
+    4.1 Model Comparison <br />
+    4.2 Hyperparameter <br />
+    &nbsp;&nbsp;&emsp; 4.2. Batchsize <br />
+    &nbsp;&nbsp;&emsp; 4.2.2 Weight decay <br />
+    4.3 Result Diagram & Final Model and Hyper Parameters <br />
+5. Future Work
+6. Appendix: *Environment  & Getting Started* ...
 
+However DDPG trains a policy that approximates the optimal action. Therefore its a determenistic policy-gradient method restriced to contious space.[2] 
 
-## 1) Intro Reinforcement Learning
-The idea that we learn by interacting with our environment is probably the first to occur to us when we think about the nature of learning. When an infant plays, waves its arms or looks about, it 
-has no explicit teacher, but it does have a direct sensorimotor connection to its environment. Exercising this connection produces a wealth of information about
-cause and effect, about the consequences of actions, and about what to do in order to achieve goals. Throughout our lives, such interaction are undoubtedly a major source of knowledge
-about our environment and ourself. Whether we are learning to drive a car, to hold conversation, we are acutely aware of how our environment responds
-to what we do and we seek to influence what happens through our behavior. Learning from interaction is a foundational idea underlaying nearly all theories of learning and
-intelligence.[1]
+## 1) Policty Gradien Methods
 
-Reinforcement learning is learning what to do - how to map situation to action -- so as to maximize a numerical rewards signal. The learner is not told which actions to take, but instead must discover which actions yield the most rewards by
-trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.
-These two characteristics -trail and error search and delayed reward are the two most important distinguishing features of reinforcement learning. [1]
+In the first [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) a brief introduction to Reinforcment Learning and to the value base functions DQNs is given. Also a big role in the Reinforcment Learning are Policy Gradient Methods playing, that learn a parameterized policy and selcet actions without consulting a vaulue function. A value function may still be used to learn the policy parameters.
+Like actor-critic methods that learn approximation to both policy and value fucntions, where 'actor' is referenc to the learned policy and 'critic' refers to the learnd value function.
+Perhabs the simplest advantage that policy parameterization may have over action-value parametrization is that the policy may be a simpler function to approximate. Policy-based method will typically learn faster and yield a superior asymtotic policy (as in Tetris, see Simek, Algorta and Kothiyal, 2016)[3]
 
-The problem formalization in reinforcement is using ideas from dynamical systems theory, specifically, as the optimal control of incompletely-kwon
-Markov decision process &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\left(S,A,r(s_{t},a_{t}),P(s_{t&plus;1}|s_{t},a_{t}),\gamma&space;\right)) &nbsp;.[1] <br />
-At time step *t*, the agent selects the action &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;a_{t}\in&space;A) &nbsp; by following a police
-&nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\pi&space;:&space;S\rightarrow&space;\mathbb{R}). After executing *at*, the agent 
-is transferred to the next state *st+1* with probabilities &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;P(s_{t&plus;1}|s_{t},a_{t})).
-Additional, a reward signal ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;r(s_{t},a_{t})) is received to describe whether the underlying
-action *at* is good for reaching the goal or not. For the purpose of brevity, rewrite &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;r(s_{t},a_{t})). By repeating 
-this process the agent interacts with the environment and obtains a behavior &nbsp; ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\tau&space;=s_{1},a_{1},r_{1},......,s_{T},r_{T}) &nbsp;
-at the terminal time step T. The discount cumulative reward from time-step *t* can be formulated as <br />
-![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;R_{t}=\sum_{k=t}^{T}\gamma&space;^{k-t}r_{k})<br />
-where ![equation](https://latex.codecogs.com/gif.image?\dpi{90}&space;\gamma&space;\in&space;(0,1)) is the discount rate that determines the importance of the
-future reward.[2]
+While value functions like DQNs solve problems with high-dimensinal observation space, it can only handle discret and low-dimensinal action spaces. Many tasks of interest, most notably pyhsical control taks, have continous (real valued) and high dimensinal action spaces. DQNs cannot be straight-forwardly applied to continous domains since they rely on finding
+the action that maximizes the action-value function.[1] On the other hand Policy-based methods offer practical ways of dealing with large action spaces, even continous spaces with an inifinite number of actions. Instead of computing learned probabilities for each of the many action, they instead learn statistics of the probability destribution. [3]
 
-## 2) Deep Reinforcement Learning (Deep Q-Networks)
-While reinforcement learning agents have achieved some success in a variety of domains, their applicability has previously been limited to domains in 
-which useful features can be handcrafted. Here we used recent advances in training deep neural networks to develop a novel artificial agent, termed
-a deep Q-network, that can learn successful policies directly from high-dimensional sensory inputs using end to end reinforcement learning. [3]
-
-So in this project an implementation that is close to this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) is used.
-However instead of using Convolutional layers, a less computational network of three neuronal layers is used. Hence the environment provides an observation space vector 
-of 37 dimensions that contains the agents velocity, along with ray-based perception of objects around the agents forward direction. This vector is used
-as input for the net. As output, four discrete values that are identical as the action space vector, are used.
-
-Picture 2 illustrates the end to end learning of the neuronal net, with the dimensions of the net. The agent by it self trains the net with
-its actions. 
+## 2) Actor-Critic Methods
+Actor-critic algorithms learn both policies and value functions. The 'actor' is the component that learns policies and the 'critic' is the component that learns about whatever policy is currently being followed by the actor on order to 'criticize' the actors action choises.<br />
+The critic use a Temporal Difference (TD) algorithm to learn the state-value function for the actors current policy. The value function allows the ciritc to critique the actors action choises by sending TD errors to the actor. Bases on these critiques th actor continuity updates its policy. 
+So two worlds can be combined, the actor has a high variance but low bias on the other hand the critic have low variance and high bias. 
 
 <figure>
- <img src="./img/Net.png" width="500" alt="Net" />
+ <img src="./img/ActorCritic_Modell.png" width="360" alt="" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2: Schematic illustration of the neural network.  </p> 
+ <p style="text-align: center;"> Fig. 2: Actor Critic Modell. The actor adjust a policy based on the TD error recived from the critic. the critic adjusts state-value parameters using  the same error. It produces a error from the rewards signal, R and the current change in its esimate of state values. The actor does not have direct acces to the rewads signal, and the critic does not have direct access to the action [3].  </p> 
  </figcaption>
 </figure>
  <p></p>
 
- Formally the neural network is used to approximate the optimal action value function
+In this methods the state-value function is applied also to the second state of transistion. From the TD learning of value functions throughout this book, the one-step return is often superior to the actual return in terms of its variance and computational congeniality.
+The critic introduces bias into the actors gradient estimaes, but often desibale for the same reason that bootstrapping TD methods are often superiour to Monte Carlo methos (substantially reduced variande)
 
- ![equation](https://latex.codecogs.com/gif.image?\dpi{100}&space;Q^{*}(s|a)=&space;max_{\pi}E[r_{t}&plus;\gamma^{2}r_{t&plus;2}&plus;....|s_{t}=s,a_{t}=a,\pi]&space;)
+## 3) DDPG
+Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
+- Replaybuffer to train an action-value function in an off-policy manner to minimize correlations between sampels<br />
+- Target Networks to stabilize training <br />
 
- wich is the maximum sum of rewards *rt* discounted by y at each time step *t*. Achievable by a behavior policy
- &nbsp; ![equation]( https://latex.codecogs.com/gif.image?\dpi{90}&space;\pi&space;=&space;P(a|s)), after making an observation *(s)*
- and taking an action *(a)*. Reinforcement learning is kwon to be unstable or even to diverge when a nonlinear function approximator such as a 
- neuronal network is used to represent the action-value, also known as Q-function. This instability is corrected by using experience replay and 
- Q-fixed target.[3]
-
-## 3) Double Q-Learning (Double DQN)
-The popular Q-Learning algorithm is known to overestimate action values under certain conditions. Q-Learning by it self is one of the most popular reinforcement 
-learning algorithms, but it is known to sometimes learn unrealistic high action values because it includes a maximization step over estimated action values, which tend to 
-prefer overestimated to underestimated values. [4]
-
-To focus on this problem, lets look at the updated rule for Q-Learning and focus on the TD target. Here the max operation is necessary to
-find the best possible value for the next state.
+The training process from DQN to DDPG is quiet similar, the agent collects experiances in an online manner and stores these examples into a replay buffer, that is commonly sampeled uniformly at random. The agent then uses mini-batches to calculate a bootsrapped TD target and train a Q-function. The main difference is, DQNs uses an arg max function for greedy action and DDPG uses a deterministic policy function that is trained to approximate the greedy action.[2] 
 
 <figure>
- <img src="./img/DoubleDQN_tdtarget.png" width="350" alt="DoubleDQN" />
+ <img src="./img/DQN_DDPG_valuefunction.png" width="750" alt="whatever" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 3.1: Update equation Q-Learning.  </p> 
+ <p style="text-align: center;"> Fig. 2: Value Function Objectivs [2].  </p> 
  </figcaption>
 </figure>
  <p></p>
 
-Lets rewrite the target and expend the operation (fig. 3.2). Its just a more efficient way of saying that we want to obtain the Q-value for the State *S'*
-and the action that results in the maximum Q-value among all possible action from that state. We can see that the arg max operation can easily make an 
-mistake, specially in the early stages when the estimations are not yet sophisticated and the Q-Value is still evolving. The accuracy of
-our Q-values depends a lot of what actions have been tried and which neighboring states have been explored. This results in an overestimate of Q-values
-since we always pick the maximum among a set of noisy numbers.
- 
+Learning a deterministic policy, we want to train a network that can give us the optimal action in a given state. That means the agent tries to find the action that maximizes this value. The objectiv is simple, we can use the expected Q-value from the Critic to maximaze the action policy. 
 <figure>
- <img src="./img/DoubleDQN_expanded.png" width="350" alt="DoubleDQN" />
- <figcaption>
+ <img src="./img/DDPG_deterministic_policy.png" width="750" alt="whatever" />
  <p></p> 
- <p style="text-align: center;"> Fig. 3.2: Update equation Q-Learning expanded.  </p> 
+ <p style="text-align: center;"> Fig. 3: DDPG deterministic policy [2].  </p> 
  </figcaption>
 </figure>
  <p></p>
 
-To make the estimate more robust a double Q-Learning algorithm can be used. Where we select the best action using  on set of parameters *w*, but evaluate it
-using a different set of parameters *w'*, see figure below. It's basically like having two separate function approximations that must agree on the best action. If *w* pick an action that is 
-according to *w'*, then the Q-value returned is not that high. In the long run, this prevents the algorithm from propagating incidental high rewards
-that may have been obtained by chance and don't reflect long-term returns.<br />
-Where do we get the second set of parameters from? In the original formulation of Double Q-Learning, you would basically maintain two value functions
-and randomly choose one of them to update at each step and using the other only for evaluating actions. But we using DQNs with fixed Q targets, so
-we already have an alternate set of parameters. Remember *w-*. Since w-minus is kept frozen for a while it is different enough from *w* that it can be
-reused for this purpose. And thats it, this simple modification keeps Q-values in check, preventing them from exploding in early stages of learning or
-fluctuating later on
+**Exploration with deterministic policies:**
+Since the DDPG agent learns a deterministic policy, it wont explore on-ploicy.To deal with this issue noise is injected into the action selected by the policy. This means in DDPG the agent explores by adding external noise to actions, using off policy explorations stragtegies. 
 
-<figure>
- <img src="./img/DoubleDQN_update.png" width="250" alt="DoubleDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 3.3: Update equation Double DQN.  </p> 
- </figcaption>
-</figure>
- <p></p>
+## 4) Model Comparison & Hyper Parameter Tuning<
+The final chapter is divided in two parts. Starting in search of neuronal model arichtecutres and finishing with tuning of the hyper parameters of the weight declay and batchsize.
 
+All the final parameter,architecture details and results you can find in the Report.md.
 
- ## 4) Prioritized Experience Replay (PER)
-Online reinforcement learning (RL) agents incrementally update their parameters (of the policy, value function or model) while they observe a stream of experience.
-In their simplest from, they discard incoming data immediately, after a single update. Two issues with this are a strongly correlated updates that break i.i.d. assumption of many popular stochastic 
-gradient-based algorithms and (b) the rapid forgetting of possible rare experience that would be useful later on.[5]
+### 4.1 Model Comparison
+To finde the most suiting neuronal arichtecture three models are going to be comphared.
+1. The orginal model from Udacity with an architecture
+    - actor one fully connected layer 256
+    - critic three fully connected layers size 256 256 128
+2. Introduction of the actor net from the orginal DDPG paper[1] and staying with the critic net from former projects
+    - actor two fully connected layers size  400 300
+    - critic three fully connected layers size 256 256 128
+3. Going all in the net size from the orginal DDPG paper[1]
+    - actor two fully connected layers size  400 300
+    - critic two fully connected layers size 200 200
 
-Let's recall the basic idea behind experience replay. The Agent interact with the environment to collect experience tuples *<S,A,R....>*, save
-them in a buffer, and then later randomly sample a batch to learn from. This helps to break the correlation between consecutive experiences and
-stabilizes our learning algorithm.<br />
-Now Prioritized Experience Replay comes into play, some of these experiences may be more important for learning than others and may occur infrequently.
-Since buffers are practically limited in capacity older may imported experiences get lost. This is where Prioritized Experience Replay helps.
-<figure>
- <img src="./img/experiance_replay.png" width="350" alt="PerDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 4.1: Experience Replay working principle.  </p> 
- </figcaption>
-</figure>
- <p></p>
+Its seen that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
 
-One approach to assign the priorities for the tuples, is to use the TD error delta (fig. 4.2). The bigger the error the more we expect to learn from that tuple.
-So let's take the magnitude of this error as a measure of priority and store it along with each corresponding tuple in the replay buffer.
-By using batches, as we do, we can use sampling probabilities. Select any tuple *i* with a probability equal to its priority value *PI* normalize
-by the sum of all priority values in the replay buffer. When a tuple is picked we can update its priority with a newly computed TD error using
-the lates *q* values. This reduce the number of batch updates needed to learn a value function.
+### 4.2 Hyper parameter
+#### 4.2.1 Batchsize
+So the second model from 4.1 is taken and runs with different batchsizes. 
+1. 128
+2. 256
+3. 64, thats the batch size they used in the DDPG paper[1]
 
-<figure>
- <img src="./img/per_buffer.png" width="350" alt="PerDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 4.2: Experience Replay Buffer.  </p> 
- </figcaption>
-</figure>
- <p></p>
+Briefly spoken, the batch size of 256 perfromes best in the manner that it reaches fastest the goal score.
 
-First note, that if the TD error is zero than the priority value of the tuple enhance its probability of being picked will also be zero.
-Zero or very low TD error doesn't necessarily mean we have nothing more to learn from such a tuple, it might be the case that our estimate was
-close due to the limited samples we visited till that point. So to prevent such tuples from being starved for selection we can add a small 
-constant e to every priority value. Another issue along similar lines is that greedily using these priority values may lead to a small subset of 
-experiences being replayed over and over resulting in a overfitting to that subset. To avoid this, we reintroduce some elements of uniform random sampling.
-This adds another hyper parameter *a* which we use to redefine the sampling probability as priority *PI* to the power *a* divided by the sum of all priorities *Pk*
-each raised to the power *a*.
+#### 4.2.2 Weight Declay
+Finally a weight decay L2 is introduced and compared how the impact will be. 
+1. No weight declay 
+2. WEIGHT_DECAY = 0.0001 like in the former project
+3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
 
-<figure>
- <img src="./img/per_sampling_probability.png" width="90" alt="PerDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 4.3: Experience Replay Sampling.  </p> 
- </figcaption>
-</figure>
- <p></p>
-
-We can control how much we want to use priorities versus randomness by varying this parameter *a*. Where *a=0* corresponds to pure
-uniforme randomness and *a* equals one only uses priorities.<br />
-
-When we are using *PER*, we have to make one adjustment to our update rule. The original Q-learning update is derived from an expectation over all
-experiences. When using a stochastic update rule, the way we sample these experiences must match the underlying distribution they come from.
-This is preserved when we sample experience tuples uniformly from the replay buffer. But this assumption is violated when we use a non-uniform sampling, 
-like priorities. The q values we learn will be biased according to these priority values which we only wanted to use for sampling. To correct for
-this bias, we need to introduce an impotent sampling weight equal to one over *n*, where *n* is the size of this replay buffer, times one over the sampling 
-probability *PI*.<br />
-We can add another hyper parameter *b* and raise each important sampling weight to *b*, to control how much these weights affect learning. In fact, 
-these weights are more important towards the end of learning when your q values begin to converge. So you can increase *b* from a low value to one over time.
-
-<figure>
- <img src="./img/per_update_rule.png" width="200" alt="PerDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 4.4: Experience Replay update rule.  </p> 
- </figcaption>
-</figure>
- <p></p>
-
-## 5) Hyper Parameter Tuning & Agent Comparison
-The final chapter is divided in two parts. Starting with the tuning of the hyper parameters of the greedy gradient decay and the buffer size and finishing 
-with the comparison of the above describe agents. 
-
-All the final *parameter*,*architecture* details and results of the different algorithms you can find in the [*Report.md*](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/blob/main/p1_navigation/Report.md). 
-
-### 5.1 Hyperparameter 
-The two parameters are chosen, since they have a severe influence to the system.<br />
-The **Greedy gradient** represent the dilemma between exploration and  exploitation. *Exploration* is the right thing to, maximize the expected 
-the expected reward on the one step, but *exploration* may produce the greater total reward in the long run[1].
-One strategy is, if you have many time steps ahead on which to make action selection, then it may be better to explore the non-greed actions and discover  which 
-of them are better than the greedy action. Reward is lower in the short run, during  exploration, but higher in the long run.
-This could be done by a linearly decay *eps=1.0->0.1* with a steady decay after every step with the equation below. Where *eps_end* is the minimal value and *eps_decay*
-is the rate for the degradation : 
-
-![equation](https://latex.codecogs.com/gif.image?\dpi{80}&space;\varepsilon&space;=&space;max(\varepsilon_{end},&space;\varepsilon&space;*\varepsilon_{decay}))
-
-The **buffer size** influences the hardware store design and the computational learning time. That means that a bigger buffer
-needs longer to scan the saved experiences and to pick one of them. The other parameters are taken over from older projects where the neuronal net
-has been designed<br />
-
-#### 5.1.1 Epsilon (decay)
-So the expectation is to figure out a suitable degradation gradient that fits the project requirements. Therefore
-three values are tested, seen in image five. It's seen that the  epsilon decay with 0.9975 takes the longes time to learn, that is expected.
-Between the epsilon values 0.97 and 0.98 is just a small difference, however the 0.98 value has the best performance. Therefore its chosen to continue 
-with, for the next experiments. 
-
-#### 5.1.2 Buffer size
-It's expected that a bigger buffer, performs better. Due to more important and infrequent experience that can be stored.
-Moreover it would probably have a smoother saturation with less oscillation. <br />
-Three buffer sizes are tested, starting with *1e4* and continuing in a 10x magnitude rise, image 5. 
-The Result is that the size seems to have less influence than the greedy gradient. The runs have more or less all the
-same learning inclination. Moreover the exception that the bigger buffer have less oscillation is right.<br />
-For the next tests the Buffer size of 1e5 is chosen, since it has a good trade off between performance and computational time. 
-
-### 5.2 Agent Comparison
-Actually an expected behavior would be that the PER-DQN agent performs best and then in decay order the Double-DQN and the DQN algorithm.
-However the results looks different. The DQN algorithm is the fastest learner and the Double-DQN agent reaches in total the highes score.
-
-What is the reason for this behavior: One explanation could be that the environment is too easy, so that the sophisticated algorithm can't play there hand.
-Moreover is difficult to compare the algorithms by just one run, since the results are strongly depend on how fast the stochastic exploration
-is hitting the best values. Which leads to a heavy divagation even for the same algorithm. 
-
-### 5.3 Result Diagram
-
-<figure>
- <img src="./img/Conclusion.png" width="500" alt="PerDQN" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;"> Fig. 5: Results of the experiments.  </p> 
- </figcaption>
-</figure>
- <p></p>
-
-## 6) Future Work
+ ## 5) Future Work
 Further improvements could be done in the following fields:
-1. **Deep Neuronal Network**. Instead of three neuronal layers that are connected to the observation space vector, a *CNN*
-that is connected to the raw pixel display could be used. This would make the agent applicable for a wide field of games. More information you
-can find in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf).
-2. **State of the art**. Implementing the *Rainbow* algorithm. That so fare reaches the best performance of the DQN agents. Here you will find
-the *Rainbow* [paper](https://arxiv.org/abs/1710.02298).
+- Implementing PPO & TD3 (State of the art imporvments over DDPG)
+- Implementing a multiagent A2C algorithm to handyle the 20 agents. 
 
-## Appendix
-### Citation
-[1]Reinforcement Learning, Sutton & Barton <br />
-[2]Reinforcement Learning and Deep Learning based Lateral Control for Autonomous Driving [Link](https://arxiv.org/abs/1810.12778) <br />
-[3]Human-level control through deep reinforcement learning [Link](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) <br />
-[4]Deep Reinforcement Learning with Double Q-Learning [Link](https://arxiv.org/abs/1509.06461) <br />
-[5]Prioritized Experience Replay [Link](https://arxiv.org/abs/1511.05952) <br />
+## From Udacity
 
-### Environment 
-The environment is a modified version of the [**Food Collector**](https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Learning-Environment-Examples.md#banana-collector)
-from the Unity ML-Agents toolkit.
+For this project, you will work with the [Reacher](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#reacher) environment.
 
-The observation vector consist of a 5x7 matrix for the bananas position, related to the forward position of the agent. Additionally the agents velocity 
-in the plane (x,y) are included. In total this are then 37 dimension. 
+In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.
 
-The action space contains four discrete values:
+The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
 
-- **`0`** - move forward.
-- **`1`** - move backward.
-- **`2`** - turn left.
-- **`3`** - turn right.
 
-More information about the environment can be found [here](https://wpumacay.github.io/research_blog/posts/deeprlnd-project1-navigation/#1-description-of-the-banana-collector-environment), 
-however this information could not be verified, yet. 
+
+
+
+
+
+
+
+### Distributed Training
+
+For this project, we will provide you with two separate versions of the Unity environment:
+- The first version contains a single agent.
+- The second version contains 20 identical agents, each with its own copy of the environment.  
+
+The second version is useful for algorithms like [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience.  
+
+
+
+#### Option 2: Solve the Second Version
+
+The barrier for solving the second version of the environment is slightly different, to take into account the presence of many agents.  In particular, your agents must get an average score of +30 (over 100 consecutive episodes, and over all agents).  Specifically,
+- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent.  This yields 20 (potentially different) scores.  We then take the average of these 20 scores. 
+- This yields an **average score** for each episode (where the average is over all 20 agents).
+
+The environment is considered solved, when the average (over 100 episodes) of those average scores is at least +30. 
 
 ### Getting Started
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
-    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
-    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
-    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
-    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+
+    - **_Version 2: Twenty (20) Agents_**
+        - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux.zip)
+        - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher.app.zip)
+        - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip)
+        - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip)
     
     (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
-    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
+    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher_Linux_NoVis.zip) (version 1) or [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux_NoVis.zip) (version 2) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
 
-2. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
+2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. 
+
+### Instructions
+
+Follow the instructions in `Continuous_Control.ipynb` to get started with training your own agent!  
+
+### (Optional) Challenge: Crawler Environment
+
+After you have successfully completed the project, you might like to solve the more difficult **Crawler** environment.
+
+![Crawler][image2]
+
+In this continuous control environment, the goal is to teach a creature with four legs to walk forward without falling.  
+
+You can read more about this environment in the ML-Agents GitHub [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#crawler).  To solve this harder task, you'll need to download a new Unity environment.  (**Note**: Udacity students should not submit a project with this new environment.)
+
+You need only select the environment that matches your operating system:
+- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Linux.zip)
+- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler.app.zip)
+- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Windows_x86.zip)
+- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Windows_x86_64.zip)
+
+Then, place the file in the `p2_continuous-control/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.  Next, open `Crawler.ipynb` and follow the instructions to learn how to use the Python API to control the agent.
+
+(_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
+## Appendix
+### Citation
+[1]Deep Deterministic Policy Gradient [Link](https://arxiv.org/pdf/1509.02971.pdf) <br />
+[2]Deep Reinforcement Learning, *Miguel Morales* <br />
+[3]Reinforcement Learning, Sutton & Barton <br />
+[4]Contiuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
