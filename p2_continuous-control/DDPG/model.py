@@ -12,7 +12,7 @@ def hidden_init(layer):
 class Actor(nn.Module):
     """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=256):     #fc2_units=300
+    def __init__(self, state_size, action_size, seed, fc1_units=400, fc2_units=300):     #fc2_units=300
         """Initialize parameters and build model.
         Params
         ======
@@ -25,29 +25,29 @@ class Actor(nn.Module):
         super(Actor, self).__init__()
         self.seed = torch.manual_seed(seed)
         self.fc1 = nn.Linear(state_size, fc1_units)
-        #self.fc2 = nn.Linear(fc1_units, fc2_units)     # 2Layer Mode
-        #return F.tanh(self.fc3(x))         # 2Layer Mode
-        self.fc2 = nn.Linear(fc1_units, action_size)  #1Layer Modus
+        self.fc2 = nn.Linear(fc1_units, fc2_units)     # 2Layer Mode
+        self.fc3 = nn.Linear(fc2_units, action_size)       # 2Layer Mode
+        #self.fc2 = nn.Linear(fc1_units, action_size)  #1Layer Modus
         self.reset_parameters()
 
     def reset_parameters(self):
         self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
-        #self.fc2.weight.data.uniform_(*hidden_init(self.fc2))
-        #self.fc3.weight.data.uniform_(-3e-3, 3e-3)
-        self.fc2.weight.data.uniform_(-3e-3, 3e-3)
+        self.fc2.weight.data.uniform_(*hidden_init(self.fc2))   # 2Layer Mode
+        self.fc3.weight.data.uniform_(-3e-3, 3e-3)  # 2Layer Mode
+        # self.fc2.weight.data.uniform_(-3e-3, 3e-3)     # 1Layer Mode
 
     def forward(self, state):
         """Build an actor (policy) network that maps states -> actions."""
         x = F.relu(self.fc1(state))
-        #x = F.relu(self.fc2(x))
-        #return F.tanh(self.fc3(x))
-        return F.tanh(self.fc2(x))
+        x = F.relu(self.fc2(x))    # 2Layer Mode
+        return F.tanh(self.fc3(x)) # 2Layer Mode
+        #return F.tanh(self.fc2(x))  # 1Layer Mode
 
 
 class Critic(nn.Module):
     """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=256, fc2_units=256, fc3_units=128 ):   #fc3_units=32
+    def __init__(self, state_size, action_size, seed, fcs1_units=256, fc2_units=256, fc3_units=128 ):   #fc3_units=128
         """Initialize parameters and build model.
         Params  
         ======
@@ -72,7 +72,7 @@ class Critic(nn.Module):
         self.fc2.weight.data.uniform_(*hidden_init(self.fc2))
         self.fc3.weight.data.uniform_(*hidden_init(self.fc3)) #3 Layers Mode
         self.fc4.weight.data.uniform_(-3e-3, 3e-3)          #3 Layers Mode
-        #self.fc3.weight.data.uniform_(-3e-3, 3e-3)  # 2 Layers Mode
+        # self.fc3.weight.data.uniform_(-3e-3, 3e-3)  # 2 Layers Mode
 
     def forward(self, state, action):
         """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
