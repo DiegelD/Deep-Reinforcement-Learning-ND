@@ -35,7 +35,7 @@ Overview
 1. Policty Gradien Methods
 2. Actor-Critic Methods
 3. DDPG
-4. Model Comparison & Hyper Parameter Tuning<br />
+4. Model Comparison & Hyper Parameter Tuning <br />
     4.1 Model Comparison <br />
     4.1 Hyperparameter <br />
     &nbsp;&nbsp;&emsp; 4.1.1 Batchsize <br />
@@ -132,6 +132,11 @@ Finally a weight decay L2 is introduced and compared how the impact will be.
 1. No weight declay 
 2. WEIGHT_DECAY = 0.0001 like in the former project
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
+
+ ## 5) Future Work
+Further improvements could be done in the following fields:
+- Implementing PPO & TD3 (State of the art imporvments over DDPG)
+- Implementing a multiagent A2C algorithm to handyle the 20 agents. 
 
 ## From Udacity
 
