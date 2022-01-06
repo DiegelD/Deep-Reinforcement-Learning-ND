@@ -37,9 +37,9 @@ Overview
 3. DDPG
 4. Model Comparison & Hyper Parameter Tuning <br />
     4.1 Model Comparison <br />
-    4.1 Hyperparameter <br />
-    &nbsp;&nbsp;&emsp; 4.1.1 Batchsize <br />
-    &nbsp;&nbsp;&emsp; 4.1.2 Weight decay <br />
+    4.2 Hyperparameter <br />
+    &nbsp;&nbsp;&emsp; 4.2. Batchsize <br />
+    &nbsp;&nbsp;&emsp; 4.2.2 Weight decay <br />
     4.3 Result Diagram & Final Model and Hyper Parameters <br />
 5. Future Work
 6. Appendix: *Environment  & Getting Started* ...
@@ -119,7 +119,8 @@ To finde the most suiting neuronal arichtecture three models are going to be com
 
 Its seen that the second model performs best and reaches fastest the 30 score solving line and also and 37 score where the algorithms gets aborded. The thered model performse worsed and is stoped shortly after 200 episodes, since no improvement is reconized.
 
-### 4.2 Batchsize tuning
+### 4.2 Hyper parameter
+#### 4.2.1 Batchsize
 So the second model from 4.1 is taken and runs with different batchsizes. 
 1. 128
 2. 256
@@ -127,7 +128,7 @@ So the second model from 4.1 is taken and runs with different batchsizes.
 
 Briefly spoken, the batch size of 256 perfromes best in the manner that it reaches fastest the goal score.
 
-### 4.3 Weight Declay
+#### 4.2.2 Weight Declay
 Finally a weight decay L2 is introduced and compared how the impact will be. 
 1. No weight declay 
 2. WEIGHT_DECAY = 0.0001 like in the former project
