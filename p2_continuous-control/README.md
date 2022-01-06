@@ -137,7 +137,7 @@ Finally a L2 weight decay is tested.
 2. WEIGHT_DECAY = 0.0001 like in the former project
 3. WEIGHT_DECAY = 0.01 like in the  DDPG paper[1]
 
-However both tests with weight decay faild. Resons could be the special environement where we have 20 agents but do not use all and every update of them. -> Have a look in the code in the file agent.step().
+However both tests with weight decay faild. Resons could be that in the previous test did no overfitting accoured and therefore also the parameter is not used.
 
 ### Result Diagram & Final Model and Hyper Parameters 
 As a result the DDPG algorithm with an actor size of 400-300, a critic size of 256-256-128 and a batchsize of 256 shows the best performance. 
@@ -150,8 +150,6 @@ All the other parameters can be found here Report.md.
  </figcaption>
 </figure>
  <p></p>
-
-
 
  ## 5) Future Work
 Further improvements could be done in the following fields:
