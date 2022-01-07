@@ -28,7 +28,7 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
-BUFFER_SIZE = int(1e6)  # replay buffer size <br />
+BUFFER_SIZE = int(1e6)  # replay buffer size  &nbsp;  &nbsp;  &nbsp; BATCH_SIZE = 256        # minibatch size<br />
 BATCH_SIZE = 256        # minibatch size<br />
 GAMMA = 0.99            # discount factor<br />
 TAU = 1e-3              # for soft update of target parameters<br />
