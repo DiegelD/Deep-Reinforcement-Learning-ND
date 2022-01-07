@@ -28,15 +28,17 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
-``\LaTeX``  ``$$\begin{array}{cc}
-BUFFER_SIZE = int(1e6) & WEIGHT_DECAY = 0.0 \\
-BATCH_SIZE = 256 & EPSILON_DECLAY = 1e-6 \\
-GAMMA = 0.99 & EPSIOLON = 1.0 \\
-GAU = 1e-3& N_LEARN_UPDATES = 10 \\
-LR_ACTOR = 1e-4 & N_TIME_STEPS    = 20 \\
-LR_CRITIC = 1e-3 & x_{3}\\
-\end{array}$$ ``
-
+BUFFER_SIZE = int(1e6)  # replay buffer size
+BATCH_SIZE = 256        # minibatch size
+GAMMA = 0.99            # discount factor
+TAU = 1e-3              # for soft update of target parameters
+LR_ACTOR = 1e-4         # learning rate of the actor 
+LR_CRITIC = 1e-3        # learning rate of the critic
+WEIGHT_DECAY = 0.0      # L2 weight decay
+EPSILON_DECLAY = 1e-6   # noise reduction -> Similar to greedy reduction eploration and exploiting
+EPSIOLON       = 1.0    # Initial noise reduction level
+N_LEARN_UPDATES = 10    # Number of learning updates
+N_TIME_STEPS    = 20    # every n time step do update
 
 ## DQNs Parameters
 - Replay buffersize: 1e5
@@ -107,3 +109,13 @@ can find in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNa
 2. **State of the art**. Implementing the *Rainbow* algorithm. That so fare reaches the best performance of the DQN agents. Here you will find
 the *Rainbow* [paper](https://arxiv.org/abs/1710.02298).
 
+
+
+$$\begin{array}{cc}
+BUFFER_SIZE = int(1e6) & WEIGHT_DECAY = 0.0 \\
+BATCH_SIZE = 256 & EPSILON_DECLAY = 1e-6 \\
+GAMMA = 0.99 & EPSIOLON = 1.0 \\
+GAU = 1e-3& N_LEARN_UPDATES = 10 \\
+LR_ACTOR = 1e-4 & N_TIME_STEPS    = 20 \\
+LR_CRITIC = 1e-3 & x_{3}\\
+\end{array}$$
