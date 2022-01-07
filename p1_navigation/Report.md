@@ -14,18 +14,29 @@ Overview
 2. Algorithm Results
 3. Future Work
 
-## 1) Parameters
+## 1) Final Parameters
 ### NN Architecture
-1. Fully-connected layer - input 37, output 64
-2. Fully-connected layer - input 64, output 64
-3. Fully-connected layer - input 64, output 4
+#### Actor 
+1. Fully-connected layer - input 33 (obersation states), output 400
+2. Fully-connected layer - input 400, output 300
+3. Fully-connected layer - input 300, output 4 (action size)
 
-### Parameters
-For training:
-- Maximum steps per episode 1000
-- Starting epsilon: 1.0
-- Ending epsilon: 0.01
-- Epsilon decay rate: 0.98
+### Critic
+1. Fully-connected layer - input 33 (obersation states), output 256
+2. Fully-connected layer - input 256, output 256
+4. Fully-connected layer - input 256, output 256
+3. Fully-connected layer - input 256, output 1 (TD error)
+
+### Hyper-Parameters
+$$\begin{array}{cc}
+BUFFER_SIZE = int(1e6) & WEIGHT_DECAY = 0.0 \\
+BATCH_SIZE = 256 & EPSILON_DECLAY = 1e-6 \\
+GAMMA = 0.99 & EPSIOLON = 1.0 \\
+GAU = 1e-3& N_LEARN_UPDATES = 10 \\
+LR_ACTOR = 1e-4 & N_TIME_STEPS    = 20 \\
+LR_CRITIC = 1e-3 & x_{3}\\
+\end{array}$$
+
 
 ## DQNs Parameters
 - Replay buffersize: 1e5
