@@ -28,7 +28,7 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
-`` $$\begin{array}{cc}
+``\LaTeX``  ``$$\begin{array}{cc}
 BUFFER_SIZE = int(1e6) & WEIGHT_DECAY = 0.0 \\
 BATCH_SIZE = 256 & EPSILON_DECLAY = 1e-6 \\
 GAMMA = 0.99 & EPSIOLON = 1.0 \\
