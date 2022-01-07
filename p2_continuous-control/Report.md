@@ -28,14 +28,14 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
-$$\begin{array}{cc}
+`` $$\begin{array}{cc}
 BUFFER_SIZE = int(1e6) & WEIGHT_DECAY = 0.0 \\
 BATCH_SIZE = 256 & EPSILON_DECLAY = 1e-6 \\
-GAMMA = 0.99 & EPSIOLON = 1.0\\
-GAU = 1e-3& N_LEARN_UPDATES = 10\\
-LR_ACTOR = 1e-4 & N_TIME_STEPS    = 20\\
+GAMMA = 0.99 & EPSIOLON = 1.0 \\
+GAU = 1e-3& N_LEARN_UPDATES = 10 \\
+LR_ACTOR = 1e-4 & N_TIME_STEPS    = 20 \\
 LR_CRITIC = 1e-3 & x_{3}\\
-\end{array}$$
+\end{array}$$ ``
 
 
 ## DQNs Parameters
