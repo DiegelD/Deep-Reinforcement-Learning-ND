@@ -69,8 +69,6 @@ So two worlds can be combined, the actor has a high variance but low bias on the
 </figure>
  <p></p>
 
-In this methods the state-value function is applied also to the second state of transistion. From the TD learning of value functions throughout this book, the one-step return is often superior to the actual return in terms of its variance and computational congeniality.
-The critic introduces bias into the actors gradient estimaes, but often desibale for the same reason that bootstrapping TD methods are often superiour to Monte Carlo methos (substantially reduced variande)
 
 ## 3) DDPG
 Simplyfied DDPG is descibed as an DQN-Methode for contious space since it applies many of the same techniques[1]: 
@@ -106,14 +104,14 @@ The final chapter is divided in two parts. Starting in search of neuronal model 
 All the final parameter,architecture details and results you can find in the Report.md.
 
 ### 4.1 Model Comparison
-To finde the most suiting neuronal arichtecture three models are going to be comphared.
-1. The orginal model from Udacity with an architecture
+To find the most suiting neuronal arichtecture three models are going to be comphared.
+1. Model: The orginal model from Udacity with an architecture
     - actor one fully connected layer 256
     - critic three fully connected layers size 256 256 128
-2. Introduction of the actor net from the orginal DDPG paper[1] and staying with the critic net from former projects
+2. Model: Introduction of the actor net from the orginal DDPG paper[1] and staying with the critic net from former projects
     - actor two fully connected layers size  400 300
     - critic three fully connected layers size 256 256 128
-3. Going all in the net size from the orginal DDPG paper[1]
+3. Model: Going all in the net size from the orginal DDPG paper[1]
     - actor two fully connected layers size  400 300
     - critic two fully connected layers size 200 200
 
@@ -140,7 +138,7 @@ Finally a L2 weight decay is tested.
 However both tests with weight decay faild. Resons could be that in the previous test did no overfitting accoured and therefore also the parameter is not used.
 
 ### Result Diagram & Final Model and Hyper Parameters 
-As a result the DDPG algorithm with an actor size of 400-300, a critic size of 256-256-128 and a batchsize of 256 shows the best performance. 
+As a result the DDPG algorithm with an actor size of 400-300, a critic size of 256-256-128, a batchsize of 256 and no weight decay shows the best performance. 
 All the other parameters can be found here Report.md.
 
 <figure>
@@ -153,8 +151,10 @@ All the other parameters can be found here Report.md.
 
  ## 5) Future Work
 Further improvements could be done in the following fields:
-- Implementing PPO & TD3 (State of the art imporvments over DDPG)
-- Implementing a multiagent A2C algorithm to handyle the 20 agents. 
+- Implementing [PPO](https://arxiv.org/abs/1707.06347) & [TD3](https://arxiv.org/pdf/1802.09477.pdf) (State of the art imporvments over DDPG)
+- Implementing a multiagent [A2C](https://arxiv.org/pdf/1602.01783.pdf), [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) algorithm to handyle the 20 agents. 
+- Testing a change from Ornstein-Ulenbeck to Gaussian noise
+- Implementing [StableBaseline3](https://stable-baselines3.readthedocs.io/en/master/) to compare diffrently algorithms easly
 
 ## From Udacity
 
@@ -165,13 +165,6 @@ In this environment, a double-jointed arm can move to target locations. A reward
 The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
 
 
-
-
-
-
-
-
-
 ### Distributed Training
 
 For this project, we will provide you with two separate versions of the Unity environment:
@@ -179,8 +172,6 @@ For this project, we will provide you with two separate versions of the Unity en
 - The second version contains 20 identical agents, each with its own copy of the environment.  
 
 The second version is useful for algorithms like [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience.  
-
-
 
 #### Option 2: Solve the Second Version
 
@@ -206,11 +197,6 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. 
 
-### Instructions
-
-Follow the instructions in `Continuous_Control.ipynb` to get started with training your own agent!  
-
-(_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Crawler/Crawler_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
 ## Appendix
 ### Citation
 [1]Contiuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
@@ -218,3 +204,47 @@ Follow the instructions in `Continuous_Control.ipynb` to get started with traini
 [3]Reinforcement Learning, Sutton & Barton <br />
 [4]Blog [Post](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/) Batch Size, 06.01.22 <br />
 [5]Blog Weigh Decay and L2 [Post](https://jamesmccaffrey.wordpress.com/2019/05/09/the-difference-between-neural-network-l2-regularization-and-weight-decay/),06.01.22 <br />
+
+### From Udacity
+
+For this project, you will work with the [Reacher](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#reacher) environment.
+
+In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.
+
+The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
+
+#### Dependencies
+An instruction about the dependencies u will find here:
+https://github.com/DiegelD/Deep-Reinforcement-Learning-ND
+
+#### Training
+
+For this project, we will provide you with two separate versions of the Unity environment:
+- The first version contains a single agent.
+- The second version contains 20 identical agents, each with its own copy of the environment.  
+
+The  useful for algorithms like [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience.  
+
+#### Solve the Environment
+
+The barrier for solving the second version of the environment is slightly different, to take into account the presence of many agents.  In particular, your agents must get an average score of +30 (over 100 consecutive episodes, and over all agents).  Specifically,
+- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent.  This yields 20 (potentially different) scores.  We then take the average of these 20 scores. 
+- This yields an **average score** for each episode (where the average is over all 20 agents).
+
+The environment is considered solved, when the average (over 100 episodes) of those average scores is at least +30. 
+
+### Getting Started
+
+1. Download the environment from one of the links below. You need only select the environment that matches your operating system:
+
+    - ** Twenty (20) Agents_**
+        - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux.zip)
+        - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher.app.zip)
+        - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip)
+        - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip)
+    
+    (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
+
+    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher_Linux_NoVis.zip) (version 1) or [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux_NoVis.zip) (version 2) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
+
+2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. 
