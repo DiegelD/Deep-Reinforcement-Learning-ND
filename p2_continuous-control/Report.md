@@ -28,17 +28,17 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
-BUFFER_SIZE = int(1e6)  # replay buffer size
-BATCH_SIZE = 256        # minibatch size
-GAMMA = 0.99            # discount factor
-TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 1e-3        # learning rate of the critic
-WEIGHT_DECAY = 0.0      # L2 weight decay
-EPSILON_DECLAY = 1e-6   # noise reduction -> Similar to greedy reduction eploration and exploiting
-EPSIOLON       = 1.0    # Initial noise reduction level
-N_LEARN_UPDATES = 10    # Number of learning updates
-N_TIME_STEPS    = 20    # every n time step do update
+BUFFER_SIZE = int(1e6)  # replay buffer size <br />
+BATCH_SIZE = 256        # minibatch size<br />
+GAMMA = 0.99            # discount factor<br />
+TAU = 1e-3              # for soft update of target parameters<br />
+LR_ACTOR = 1e-4         # learning rate of the actor <br />
+LR_CRITIC = 1e-3        # learning rate of the critic<br />
+WEIGHT_DECAY = 0.0      # L2 weight decay<br />
+EPSILON_DECLAY = 1e-6   # noise reduction -> Similar to greedy reduction eploration and exploiting<br />
+EPSIOLON       = 1.0    # Initial noise reduction level<br />
+N_LEARN_UPDATES = 10    # Number of learning updates<br />
+N_TIME_STEPS    = 20    # every n time step do update<br />
 
 ## DQNs Parameters
 - Replay buffersize: 1e5
