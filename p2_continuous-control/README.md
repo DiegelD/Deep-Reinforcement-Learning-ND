@@ -4,7 +4,7 @@
 [image2]: https://user-images.githubusercontent.com/10624937/43851646-d899bf20-9b00-11e8-858c-29b5c2c94ccc.png "Crawler"
 
 
-# Project 2: Continuous Control ---> Readme under construction!!!
+# Project 2: Continuous Control
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ![Trained Agent][image1]
@@ -152,6 +152,7 @@ All the other parameters can be found here Report.md.
 
  ## 5) Future Work
 Further improvements could be done in the following fields:
+- Implenenting an prioritized Replaybuffer like in the DQNs [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) chapter 4) 
 - Implementing [PPO](https://arxiv.org/abs/1707.06347) & [TD3](https://arxiv.org/pdf/1802.09477.pdf) (State of the art improvements over DDPG)
 - Implementing a multiagent [A2C](https://arxiv.org/pdf/1602.01783.pdf), [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) algorithm to handle the 20 agents. 
 - Testing a change from Ornstein-Ulenbeck to Gaussian noise
