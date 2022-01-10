@@ -6,7 +6,7 @@
 # Project 2: Continuous Control
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-![Trained Agent][image1]
+![](./img/mpc.gif)
 </p> </p> 
 GIF: Trained agent in action.
 
