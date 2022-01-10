@@ -151,9 +151,10 @@ All the other parameters can be found here Report.md.
 
  ## 5) Future Work
 Further improvements could be done in the following fields:
-- Implementing an prioritized Replay-buffer like in the DQNs [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) chapter 4) 
+- Improving the rewards function so that the reacher joints are in a specific area. And not on time over and one time under the reacher 
+- Implementing an prioritized Replay-buffer like in the DQNs [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/p1_navigation) chapter 4), that leads to a faster learning
 - Implementing [PPO](https://arxiv.org/abs/1707.06347) & [TD3](https://arxiv.org/pdf/1802.09477.pdf) (State of the art improvements over DDPG)
-- Implementing a multiagent [A2C](https://arxiv.org/pdf/1602.01783.pdf), [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) algorithm to handle the 20 agents. 
+- Implementing a multiagent [A2C](https://arxiv.org/pdf/1602.01783.pdf), [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) algorithm to handle the 20 agents 
 - Testing a change from Ornstein-Ulenbeck to Gaussian noise
 - Implementing [StableBaseline3](https://stable-baselines3.readthedocs.io/en/master/) to compare differently algorithms easily
 
