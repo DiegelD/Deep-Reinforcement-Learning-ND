@@ -160,11 +160,11 @@ Further improvements could be done in the following fields:
 
 ## Appendix
 ### Citation
-[1]Continuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
-[2]Deep Reinforcement Learning, *Miguel Morales* <br />
-[3]Reinforcement Learning, Sutton & Barton <br />
-[4]Blog [Post](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/) Batch Size, 06.01.22 <br />
-[5]Blog Weigh Decay and L2 [Post](https://jamesmccaffrey.wordpress.com/2019/05/09/the-difference-between-neural-network-l2-regularization-and-weight-decay/),06.01.22 <br />
+[1] Continuous Control with Deep Reinformcment Learning - [DDPG](https://arxiv.org/abs/1509.02971), Lillicrap & co <br />
+[2] Deep Reinforcement Learning, *Miguel Morales* <br />
+[3] Reinforcement Learning, Sutton & Barton <br />
+[4] Blog [Post](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/) Batch Size, 06.01.22 <br />
+[5] Blog Weigh Decay and L2 [Post](https://jamesmccaffrey.wordpress.com/2019/05/09/the-difference-between-neural-network-l2-regularization-and-weight-decay/),06.01.22 <br />
 
 ### From Udacity
 
