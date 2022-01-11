@@ -10,8 +10,8 @@
 GIF: Trained agent in action.
 
 ## Abstract
-In this project you will find the development of an **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
-Realised with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
+In this project you will find the development of a **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
+Realized with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary control movements by 
 getting a reward/punishment for each collected banana. 
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
