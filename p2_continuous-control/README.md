@@ -11,11 +11,11 @@
 GIF: Trained agent in action.
 
 ### Abstract
-In this project you will find the development of an model-free, off-policy **Actor Critic reinforcement learning Agent** (figure 1) using deep function approximations, a so called **Deep Deterministic Policiy Gradietn Agent** (DDPG)[1] to solve an double-jointed roboter arm to follow a certain trajectory in an 
+In this project you will find the development of an model-free, off-policy **Actor Critic reinforcement learning Agent** (figure 1) using deep function approximations, so called **Deep Deterministic Policiy Gradietn Agent** (DDPG)[1] to solve a double-jointed roboter arm to follow a certain trajectory in an 
 **Continous Space Environement**. To increase the learning speed of the algorithm an 20 agent spaced environment is used. Where every agent adds its experience to a replay-buffer which is shared by all agents and the network (critic & actor) are there for updated the equivalent amount of times. 
 
 The development of the agent is a two step process:
-*1) Implementing the the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
+*1) Implementing the given agent* from a former [project](https://github.com/DiegelD/Deep-Reinforcement-Learning-ND/tree/main/ddpg-bipedal) and making some adjustments and
 *2) tuning the hyper parameters* so that the agent collecting enough rewards to solve this problem. 
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
