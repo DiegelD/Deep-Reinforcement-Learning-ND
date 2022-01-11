@@ -10,12 +10,12 @@
 GIF: Trained agent in action.
 
 ## Abstract
-In this project you will find the development of a **deep reinforcement learning Agent** that collects yellow bananas and leaves bad (dark) ones.
+In this project you will find the development of a **Deep Reinforcement Learning Agent** that collects yellow bananas and leaves bad (dark) ones.
 Realized with a value optimization based learning approach with DQNs (figure 1). It learns model-free the rules of the game and the necessary discrete control movements by 
 getting a reward/punishment for each collected banana. 
 
 The development of the agent is a two step process. First adjusting the given agent from a former project to this project and
-tuning the hyper parameters so that the agent ist collecting as fast as possible a score of 13 bananas in at least 1800 episodes and full-filling with it the project requirements.
+tuning the hyper parameters so that the agent is collecting as fast as possible a score of 13 bananas in at least 1800 episodes and full-filling with it the project requirements.
 The second step is the extra mile, implementing additional algorithms/modifications and comparing them against the origin DQN agent.
 
  *In the following are some highlights of the project described. For deeper, wider more detailed insights feel free to check the code that speaks for itself*.
