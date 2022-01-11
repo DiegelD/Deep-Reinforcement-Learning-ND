@@ -11,7 +11,7 @@
 GIF: Trained agent in action.
 
 ### Abstract
-In this project you will find the development of an model-free, off-policy **actor critic reinforcement learning agent** (figure 1) using deep function approximations, so called **Deep Deterministic Policiy Gradietn** agent (DDPG)[1] to solve a double-jointed roboter arm to follow a certain trajectory in a 
+In this project you will find the development of an model-free, off-policy **actor critic reinforcement learning agent** (figure 1) using deep function approximations, so called **Deep Deterministic Policiy Gradietn** agent (DDPG)[1], to solve a double-jointed roboter arm to follow a certain trajectory in a 
 **continuous space environment**. To increase the learning speed of the algorithm an 20 agent spaced environment is used. Where every agent adds its experience to a replay-buffer which is shared by all agents and the network (critic & actor) are there for updated the equivalent amount of times. 
 
 The development of the agent is a two step process:
