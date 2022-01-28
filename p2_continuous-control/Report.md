@@ -61,6 +61,7 @@ Overview
     - critic three fully connected layers size 256 256 128
 #### 2.1.2 Hyper Parameter
 Batch-size variation between 256, 128 and 64.<br />
+<br />
 The left settings are followings:<br />
 -BUFFER_SIZE = int(1e6)&nbsp;# replay buffer size  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -BATCH_SIZE =  &nbsp;# minibatch size<br />
 -GAMMA = 0.99&nbsp;# discount factor     &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -TAU = 1e-3&nbsp;# for soft update of target parameters<br />
