@@ -28,12 +28,12 @@ Overview
 3. Fully-connected layer - input 256, output 1 (TD error)
 
 ### Hyper-Parameters
--BUFFER_SIZE = int(1e6)&nbsp;# replay buffer size  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-BATCH_SIZE = 256 &nbsp;# minibatch size<br />
--GAMMA = 0.99&nbsp;# discount factor     &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -TAU = 1e-3&nbsp;# for soft update of target parameters<br />
--LR_ACTOR = 1e-4 &nbsp;# learning rate of the actor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LR_CRITIC = 1e-3 &nbsp;# learning rate of the critic<br />
--WEIGHT_DECAY = 0.0&nbsp;# L2 weight decay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-EPSILON_DECLAY = 1e-6&nbsp;# noise reduction -> like greedy reduction<br />
--EPSIOLON       = 1.0&nbsp;# Initial noise reduction level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;-N_LEARN_UPDATES = 10&nbsp; #Number of learning updates<br />
--N_TIME_STEPS    = 20&nbsp;# every n time step to update<br />
+-BUFFER_SIZE = int(1e6)&nbsp;&nbsp;&nbsp;&nbsp;# replay buffer size  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-BATCH_SIZE = 256 &nbsp;# minibatch size<br />
+-GAMMA = 0.99&nbsp;&nbsp;&nbsp;&nbsp;# discount factor     &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -TAU = 1e-3&nbsp;# for soft update of target parameters<br />
+-LR_ACTOR = 1e-4 &nbsp;&nbsp;&nbsp;&nbsp;# learning rate of the actor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -LR_CRITIC = 1e-3 &nbsp;# learning rate of the critic<br />
+-WEIGHT_DECAY = 0.0&nbsp;&nbsp;&nbsp;&nbsp;# L2 weight decay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-EPSILON_DECLAY = 1e-6&nbsp;# noise reduction -> like greedy reduction<br />
+-EPSIOLON       = 1.0&nbsp;&nbsp;&nbsp;# Initial noise reduction level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;-N_LEARN_UPDATES = 10&nbsp; #Number of learning updates<br />
+-N_TIME_STEPS    = 20&nbsp;&nbsp;&nbsp;&nbsp;# every n time step to update<br />
 
 ## 2) Experiment Settings
 ### 2.1 Model Comparison
