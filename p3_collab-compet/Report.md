@@ -31,7 +31,7 @@ In the following you will find the parameters for the project
 
 
 <figure>
- <img src="./img/Scores_Signle_DDPG,jpg" width="750" alt="whatever" />
+ <img src="./img/Scores_Signle_DDPG.jpg" width="750" alt="whatever" />
  <p></p> 
  <p style="text-align: center;"> Results  </p> 
  </figcaption>
